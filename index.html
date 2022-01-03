@@ -41,7 +41,7 @@ Das Maximum für die Inzidenz liegt bei 50000, dann sind alle krank (per PCR).<b
 
 <br>
 <br>
-Erdachte Formel:<br>
+Annäherungs-Formel*:<br>
 $$ Aktuell krank = {Inzidenz \over 100000} \cdot  Einwohner Deutschland \cdot Dauer der Krankheit $$<br>
 <br>
 <br>
@@ -100,6 +100,10 @@ Es gibt ausserdem weitere <span id="G_TK">  </span> Menschen, die vermutlich ges
 <br>
 Berechnungsbeispiel vom 14.12.2021 
 <br>
+*Die Formel passte in den täglichen RKI-Lageberichten zur Berechnung der dort "aktuell" bzw. "aktiv kranken". Die Dauer der Krankheit
+variierte von 2 - 3.1, Grund daran ist sicherlich, dass man ja Momentaufnahmen hat und die Inzidenz nur aktuelle Tendenzen misst, d.h. wenn
+man in der vorigen Woche eine höhere Inzidenz hatte bleiben mehr "aktiv kranke", auch wenn es sich dann auf der berechneten Zahl einpendeln wird bei
+gleichbleibender Inzidenz.
 
 <script >
 let inz = document.querySelector("#inzidenz").value;
