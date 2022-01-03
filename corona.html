@@ -1,0 +1,202 @@
+<html lang="de">
+
+<head>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<style>
+table{
+	font-size:15pt;
+	border-collapse:collapse;
+}
+td{text-align:right;
+padding:5pt;}
+
+#feldK_TG,#feldK_TG0,#K_TG  {
+color:red;}
+#feldG_TK,#feldG_TK0,#G_TK{
+color:green;}
+</style>
+</head>
+
+
+<body>
+<h1>Inzidenz-Berechnungs-Spiele:</h1>
+Zur Vereinfachung der Berechnungen entsprechen die folgenden Zahlen jeweils denen, die entstehen,
+wenn die Inzidenz beibehalten wird über mehrere Wochen. Schwankungen werden hier nicht
+berücksichtigt, da es sich nur um Näherungswerte handeln soll und einer Vereinfachten 
+Darstellung, eventuell verstehen die Politiker dann auch besser die Zusammenhänge der Inzidenzwerte
+und der "Gefahr" und fordern keinen unrealistischen Inzidenzwert mehr?<br>
+
+<br>
+<br>
+<label> Inzidenz (7-Tages-I pro 100000)</label>
+<input id="inzidenz" name="inzidenz" value="200">
+<label> Spezifität </label>
+<input id="spezifität" name="spezifität" value="0.97">
+<label> Sensitivität </label>
+<input id="sensitivität" name="sensitivität" value="0.80">
+<label> Einwohner Deutschland </label>
+<input id="einwohner" name="einwohner" value="84000000">
+<label> Dauer der Krankheit </label>
+<input id="dauerkrank" name="dauerkrank" value="2">
+
+<br>
+<br>
+Erdachte Formel:<br>
+$$ Aktuell krank = {Inzidenz \over 100000} \cdot  Einwohner Deutschland \cdot Dauer der Krankheit $$<br>
+<br>
+<br>
+<br>
+Erläuterung: <br>
+TK: Test positiv, also Person ist laut Test krank.<br>
+TG: Test negativ, Person ist laut Test gesund.<br>
+K: "Echt krank", Person ist laut mehrfacher PCR-Test-Prüfung krank.<br>
+G: "Echt gesund", Person ist laut mehrfacher PCR-Test-Prüfung gesund.<br>
+<table>
+<tr>
+	<th style="border-right:1px black solid;border-bottom:1px black solid;"></th><th style="border-right:1px black solid;"> TK</th><th style="border-right:1px black solid;"> TG </th> <th> \( \sum \) </th>
+</tr>
+<tr>
+	<th style="border-bottom:1px black solid;"> K </th> <td id="feldK_TK" style="border:1px black solid;"> </td> <td id="feldK_TG" style="border:1px black solid;"> </td> <td id="feldK" style="border-top:1px black solid;"> </td>
+</tr>
+<tr>
+	<th style="border-bottom:1px black solid;"> G </th> <td id="feldG_TK" style="border:1px black solid;"> </td> <td id="feldG_TG"  style="border:1px black solid;"> </td> <td id="feldG" style="border-top:1px black solid;"> </td>
+</tr>
+<tr>
+	<th style="border-right:1px black solid;">\( \sum \)</th> <td id="feldTK" style="border-right:1px black solid;"> </td> <td id="feldTG" style="border-right:1px black solid;"> </td> <td id="feldEinwohner" style="border-top:1px black solid;"> </td>
+</tr>
+
+</table>
+
+<br>
+<br>
+VEREINFACHT (:1000)
+<br>
+<br>
+<table>
+<tr>
+	<th style="border-right:1px black solid;border-bottom:1px black solid;"></th><th style="border-right:1px black solid;"> TK</th><th style="border-right:1px black solid;"> TG </th> <th> \( \sum \) </th>
+</tr>
+<tr>
+	<th style="border-bottom:1px black solid;"> K </th> <td id="feldK_TK0" style="border:1px black solid;"> </td> <td id="feldK_TG0" style="border:1px black solid;"> </td> <td id="feldK0" style="border-top:1px black solid;"> </td>
+</tr>
+<tr>
+	<th style="border-bottom:1px black solid;"> G </th> <td id="feldG_TK0" style="border:1px black solid;"> </td> <td id="feldG_TG0"  style="border:1px black solid;"> </td> <td id="feldG0" style="border-top:1px black solid;"> </td>
+</tr>
+<tr>
+	<th style="border-right:1px black solid;">\( \sum \)</th> <td id="feldTK0" style="border-right:1px black solid;"> </td> <td id="feldTG0" style="border-right:1px black solid;"> </td> <td id="feldEinwohner0" style="border-top:1px black solid;"> </td>
+</tr>
+
+</table>
+
+<br>
+FAZIT:
+<br>
+Wir haben also durchschnittlich etwa <span id="K_TG">  </span> Menschen, die krank sind, aber negativen Test hatten, also herumlaufen.
+<br>
+Es gibt ausserdem weitere <span id="G_TK">  </span> Menschen, die vermutlich gesund sind, aber einen positiven Test hatten und daher in Quarantäne gesteckt werden.
+
+
+<br>
+<br>
+Berechnungsbeispiel vom 14.12.2021 
+<br>
+
+<script >
+let inz = document.querySelector("#inzidenz").value;
+let spez = document.querySelector("#spezifität").value;
+let sens = document.querySelector("#sensitivität").value;
+let einw = document.querySelector("#einwohner").value;
+let dauer = document.querySelector("#dauerkrank").value;
+
+let krank=inz/100000*einw*dauer;
+let gesund=einw - krank 
+let krankUndTestpos=krank*sens; //sens
+let gesundUndTestneg=gesund*spez;
+let gesund_Testpos=gesund - gesundUndTestneg;
+let krank_Testneg=krank-krankUndTestpos
+zahlenBerechnen();
+
+function zahlenBerechnen(){
+ krank=inz/100000*einw*dauer;
+ gesund=einw - krank 
+ krankUndTestpos=krank*sens; //sens
+ gesundUndTestneg=gesund*spez;
+ gesund_Testpos=gesund - gesundUndTestneg;
+ krank_Testneg=krank-krankUndTestpos
+
+
+document.getElementById("feldEinwohner").innerHTML= Math.round(einw);
+document.getElementById("feldK").innerHTML=Math.round(krank);
+document.getElementById("feldG").innerHTML= Math.round(gesund);
+//spezifität: Von den Gesunden sind diese auch wirklich negativ getestet
+document.getElementById("feldG_TG").innerHTML=Math.round(gesundUndTestneg);
+document.getElementById("feldG_TK").innerHTML=Math.round(gesund_Testpos);
+
+//Sensitivität: Von den Kranken werden diese korrekt krank, also mit pos test erkannt:
+document.getElementById("feldK_TK").innerHTML=Math.round(krankUndTestpos);
+document.getElementById("feldK_TG").innerHTML=Math.round(krank_Testneg);
+
+document.getElementById("feldTK").innerHTML=Math.round(krankUndTestpos + gesund - gesundUndTestneg);
+document.getElementById("feldTG").innerHTML=Math.round(krank-krankUndTestpos +gesundUndTestneg);
+
+//Einfache Tabelle füllen mit /1000
+document.getElementById("feldEinwohner0").innerHTML= Math.round(einw/1000);
+document.getElementById("feldK0").innerHTML=Math.round(krank/1000);
+document.getElementById("feldG0").innerHTML= Math.round(gesund/1000);
+document.getElementById("feldG_TG0").innerHTML=Math.round(gesundUndTestneg/1000);
+document.getElementById("feldG_TK0").innerHTML=Math.round(gesund_Testpos/1000);
+document.getElementById("feldK_TK0").innerHTML=Math.round(krankUndTestpos/1000);
+document.getElementById("feldK_TG0").innerHTML=Math.round(krank_Testneg/1000);
+document.getElementById("feldTK0").innerHTML=Math.round((krankUndTestpos + gesund - gesundUndTestneg)/1000);
+document.getElementById("feldTG0").innerHTML=Math.round((krank-krankUndTestpos +gesundUndTestneg)/1000);
+
+//Spans noch füllen :
+document.getElementById("G_TK").innerHTML=Math.round(gesund_Testpos);
+document.getElementById("K_TG").innerHTML=Math.round(krank_Testneg);
+}
+
+document.querySelector("#inzidenz").addEventListener("keypress", function(e){
+	if(e.key==="Enter"){
+		inz = document.querySelector("#inzidenz").value;
+	}
+	zahlenBerechnen();
+});
+
+document.querySelector("#spezifität").addEventListener("keypress", function(e){
+	if(e.key==="Enter"){
+		spez = document.querySelector("#spezifität").value;
+	}
+	zahlenBerechnen();
+});
+
+document.querySelector("#sensitivität").addEventListener("keypress", function(e){
+	if(e.key==="Enter"){
+		sens = document.querySelector("#sensitivität").value;
+	}
+	zahlenBerechnen();
+});
+document.querySelector("#einwohner").addEventListener("keypress", function(e){
+	if(e.key==="Enter"){
+		einw = document.querySelector("#einwohner").value;
+	}
+	zahlenBerechnen();
+});
+document.querySelector("#dauerkrank").addEventListener("keypress", function(e){
+	if(e.key==="Enter"){
+		dauer = document.querySelector("#dauerkrank").value;
+	}
+	zahlenBerechnen();
+});
+
+</script>
+</body>
+</html>
+
+
+
+
+
