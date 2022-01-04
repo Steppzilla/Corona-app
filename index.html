@@ -196,12 +196,11 @@ let krank_Testneg=krank-krankUndTestpos
 zahlenBerechnen();
 
 function zahlenBerechnen(){
-inz = document.querySelector("#inzidenz").value;
-spez = document.querySelector("#spezifität").value;
+	inz = document.querySelector("#inzidenz").value;
+	spez = document.querySelector("#spezifität").value;
 	sens = document.querySelector("#sensitivität").value;
-					einw = document.querySelector("#einwohner").value;
-
-			dauer = document.querySelector("#dauerkrank").value;
+	einw = document.querySelector("#einwohner").value;
+	dauer = document.querySelector("#dauerkrank").value;
 	
 	
  krank=inz/100000*einw*dauer;
@@ -227,7 +226,7 @@ document.getElementById("feldTK").innerHTML=Math.round(krankUndTestpos + gesund 
 document.getElementById("feldTG").innerHTML=Math.round(krank-krankUndTestpos +gesundUndTestneg);
 
 //Einfache Tabelle füllen mit /1000
-document.getElementById("feldEinwohner0").innerHTML= Math.round(einw/1000);
+/*document.getElementById("feldEinwohner0").innerHTML= Math.round(einw/1000);
 document.getElementById("feldK0").innerHTML=Math.round(krank/1000);
 document.getElementById("feldG0").innerHTML= Math.round(gesund/1000);
 document.getElementById("feldG_TG0").innerHTML=Math.round(gesundUndTestneg/1000);
@@ -236,15 +235,14 @@ document.getElementById("feldK_TK0").innerHTML=Math.round(krankUndTestpos/1000);
 document.getElementById("feldK_TG0").innerHTML=Math.round(krank_Testneg/1000);
 document.getElementById("feldTK0").innerHTML=Math.round((krankUndTestpos + gesund - gesundUndTestneg)/1000);
 document.getElementById("feldTG0").innerHTML=Math.round((krank-krankUndTestpos +gesundUndTestneg)/1000);
-
+*/
 //Spans noch füllen :
 document.getElementById("G_TK").innerHTML=Math.round(gesund_Testpos);
 document.getElementById("K_TG").innerHTML=Math.round(krank_Testneg);
 }
 
 document.querySelector("#inzidenz").addEventListener("keypress", function(e){
-	if(e.key==="Enter"){
-			
+	if(e.key==="Enter"){		
 	zahlenBerechnen();
 	}
 
