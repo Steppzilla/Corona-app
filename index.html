@@ -65,26 +65,30 @@ Das Maximum für die Inzidenz liegt bei 50000, dann sind alle krank (per PCR).<b
 </div>
 <div style="width:100px;">
 <label> Sensitivität </label>
-<input size="3" id="sensitivität" name="sensitivität" value="0.80">
+<input size="3" id="sensitivität" name="sensitivität" value="0.98">
 </div>
 <div style="width:100px;">
 <label> Spezifität </label>
-<input size="3" id="spezifität" name="spezifität" value="0.97">
+<input size="3" id="spezifität" name="spezifität" value="0.9968">
 </div>
 <div style="width:180px;">
 <label> Einwohner Deutschland </label>
-<input size="6" id="einwohner" name="einwohner" value="84000000">
+<input size="6" id="einwohner" name="einwohner" value="100000">
 </div>
 <div style="width:220px;">
 <label> Dauer der Krankheit in Wochen: </label>
-<input size="1" id="dauerkrank" name="dauerkrank" value="2">
+<input size="1" id="dauerkrank" name="dauerkrank" value="1">
 </div>
+<div style="width:220px;">
+	<label> Anzahl Tests der Woche: </label>
+	<input size="5" id="testAnzahl" name="testanzahl" value="83000000">
+	</div>
 </form>
 
 <br>
 
 Annäherungs-Formel*: 
-$$ Aktuell krank = {Inzidenz \over 100000} \cdot  Einwohner Deutschland \cdot Dauer der Krankheit $$<br>
+$$ \textrm{Aktuell krank getestet! (seit 22. 1. 2022 öffentl.)}= {Inzidenz \over 100000} \cdot  Einwohner Deutschland \cdot Dauer der Krankheit $$<br>
 
 
 <div id="main">
@@ -180,36 +184,65 @@ eine Sensitivität von 0,9652 und eine Spezifität von 0.9968 hat.
 "PCR krank", also hier als krank bezeichnete Menschen müssen keine Symptome aufweisen, laut Definition. Weiterhin ist auch nicht bekannt, ob und in welchem Maße sie ansteckend sind. 
 Es ist wohl aber bekannt, dass es auf größeren Veranstaltungen größere Ausbrüche der Krankheit gab.
 Die Definition eines symtpomlos kranken, der aber nicht ansteckend ist, ist durch Corona erst "gewonnen" worden. 
+
+<!--VARIABLEn-->
 <script >
 let inz = document.querySelector("#inzidenz").value;
 let spez = document.querySelector("#spezifität").value;
 let sens = document.querySelector("#sensitivität").value;
 let einw = document.querySelector("#einwohner").value;
 let dauer = document.querySelector("#dauerkrank").value;
+let testAnz=document.querySelector("#testAnzahl").value;
+// RECHNUNG:
 
-let krank=inz/100000*einw*dauer;
-let gesund=einw - krank 
+let testpos=inz/100000*einw*dauer; //Inzidenz entspricht dem WErt der positiv getesteten (politisch: "krank")/Einwohner, wegen suggestion//Dauer entfernt...kranke tests verlängert über dauer der krankheit??
+let testneg=einw - testpos ;   //Einwohner sind getestete Einwohner bzw Anzahl Tests (bei 3 mal die woche muss das erhöht werden)
+// ps-r-p+rp=z gleichung. p ist dabei die Prozentzahl für krank, r die Spezifität (Gesund-<gesundtest) und s die sensitivität
+
+let krank=0 ;
+let a= testpos/einw *100000;
+ a=parseInt(a) -parseInt(100000) + parseInt(spez*100000) ; // z - 1 +r
+let b= parseInt(sens*100000) - parseInt(100000)+parseInt(spez*100000);
+let c= (a/b); //testpos ist schon *testAnzahl
+krank=c*einw ;
+
+  //krank getestete
+let gesund=einw - krank //Wer mindestens einen positiven Test hat, gilt als krank für diese woche, auch wenn die anderen gesund sind, daher hier einwohner als Maßstab
+//Vierfeldertafel füllen:
 let krankUndTestpos=krank*sens; //sens
 let gesundUndTestneg=gesund*spez;
 let gesund_Testpos=gesund - gesundUndTestneg;
 let krank_Testneg=krank-krankUndTestpos
+
+
 zahlenBerechnen();
 
 function zahlenBerechnen(){
-	inz = document.querySelector("#inzidenz").value;
+ 	inz = document.querySelector("#inzidenz").value;
 	spez = document.querySelector("#spezifität").value;
 	sens = document.querySelector("#sensitivität").value;
 	einw = document.querySelector("#einwohner").value;
 	dauer = document.querySelector("#dauerkrank").value;
+	testAnz=document.querySelector("#testAnzahl").value;
 	
+	 testpos=inz/100000*einw*dauer; //Inzidenz entspricht dem WErt der positiv getesteten (politisch: "krank")
+	 testneg=einw - testpos ;   //Einwohner sind getestete Einwohner bzw Anzahl Tests (bei 3 mal die woche muss das erhöht werden)
+	// ps-r-p+rp=z gleichung. p ist dabei die Prozentzahl für krank, r die Spezifität (Gesund-<gesundtest) und s die sensitivität
+	krank=0 ;
+	 a= testpos/einw *100000;
+	 a=parseInt(a) -parseInt(100000) + parseInt(spez*100000) ; // z - 1 +r
+	 b= parseInt(sens*100000) - parseInt(100000)+parseInt(spez*100000);
+	 c= (a/b); //testpos ist schon *testAnzahl  POSITIVE zahl (absolut)
+	krank=c*einw ;
 	
- krank=inz/100000*einw*dauer;
- gesund=einw - krank 
- krankUndTestpos=krank*sens; //sens
- gesundUndTestneg=gesund*spez;
- gesund_Testpos=gesund - gesundUndTestneg;
- krank_Testneg=krank-krankUndTestpos
-
+	  //krank getestete
+	 gesund=einw - krank //Wer mindestens einen positiven Test hat, gilt als krank für diese woche, auch wenn die anderen gesund sind, daher hier einwohner als Maßstab
+	//Vierfeldertafel füllen:
+	 krankUndTestpos=krank*sens; //sens
+	 gesundUndTestneg=gesund*spez;
+	 gesund_Testpos=gesund - gesundUndTestneg;
+	 krank_Testneg=krank-krankUndTestpos
+ 
 
 document.getElementById("feldEinwohner").innerHTML= Math.round(einw);
 document.getElementById("feldK").innerHTML=Math.round(krank);
@@ -222,8 +255,8 @@ document.getElementById("feldG_TK").innerHTML=Math.round(gesund_Testpos);
 document.getElementById("feldK_TK").innerHTML=Math.round(krankUndTestpos);
 document.getElementById("feldK_TG").innerHTML=Math.round(krank_Testneg);
 
-document.getElementById("feldTK").innerHTML=Math.round(krankUndTestpos + gesund - gesundUndTestneg);
-document.getElementById("feldTG").innerHTML=Math.round(krank-krankUndTestpos +gesundUndTestneg);
+document.getElementById("feldTK").innerHTML=Math.round(testpos);
+document.getElementById("feldTG").innerHTML=Math.round(testneg);
 
 //Einfache Tabelle füllen mit /1000
 /*document.getElementById("feldEinwohner0").innerHTML= Math.round(einw/1000);
