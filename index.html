@@ -185,15 +185,15 @@ function zahlenBerechnen(){
 
 	}
  
-	 testpos=inz/100000*einw*dauer; //Inzidenz entspricht dem WErt der positiv getesteten (politisch: "krank")
+	 testpos=inz/100000*einw; //Inzidenz entspricht dem WErt der positiv getesteten (politisch: "krank")
 	 testneg=einw - testpos ;   //Einwohner sind getestete Einwohner bzw Anzahl Tests (bei 3 mal die woche muss das erhöht werden)
 	// ps-r-p+rp=z gleichung. p ist dabei die Prozentzahl für krank, r die Spezifität (Gesund-<gesundtest) und s die sensitivität
 	krank=0 ;
-	 a= Math.abs(testpos/einw *100000);
+	 a= Math.abs(testpos/(einw) *100000);
 	 a=Math.abs(parseInt(a) -parseInt(100000) + parseInt(spez*100000) ); // z - 1 +r
 	 b= parseInt(sens*100000) - parseInt(100000)+parseInt(spez*100000);
 	 c= (a/b); //testpos ist schon *testAnzahl  POSITIVE zahl (absolut)
-	krank=c*einw ;
+	krank=c*einw;
 	
 	  //krank getestete
 	 gesund=einw - krank //Wer mindestens einen positiven Test hat, gilt als krank für diese woche, auch wenn die anderen gesund sind, daher hier einwohner als Maßstab
