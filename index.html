@@ -59,36 +59,38 @@ Das Maximum für die Inzidenz liegt bei 50000, dann sind alle krank (per PCR).<b
 <br>
 <br>
 <form id="box" >
-<div style="width:200px;padding:5px;">
-<label> 7-Tages-Inzidenz pro 100000</label>
-<input   size="3" id="inzidenz" name="inzidenz" value="200">
-</div>
 <div style="width:100px;">
 <label> Sensitivität </label>
 <input size="3" id="sensitivität" name="sensitivität" value="0.98">
 </div>
-<div style="width:100px;">
+<div style="width:120px;">
 <label> Spezifität </label>
 <input size="3" id="spezifität" name="spezifität" value="0.9968">
 </div>
-<div style="width:180px;">
-<label> Einwohner Deutschland </label>
+<div style="width:80px;">
+<label> Einwohner </label>
 <input size="6" id="einwohner" name="einwohner" value="100000">
 </div>
 <div style="width:220px;">
 <label> Dauer der Krankheit in Wochen: </label>
 <input size="1" id="dauerkrank" name="dauerkrank" value="1">
 </div>
-<div style="width:220px;">
+<!--<div style="width:220px;">
 	<label> Anzahl Tests der Woche: </label>
 	<input size="5" id="testAnzahl" name="testanzahl" value="83000000">
-	</div>
+	</div>-->
+
+	<div style="width:100%;padding:5px;">
+		<label> 7-Tages-Inzidenz pro 100000</label>
+		<input   size="3" id="inzidenz" name="inzidenz" value="200">
+		<label> aktueller Mindestwert: <span id="mindestInzidenz">   </span> (abh. von Spezifität) </label>
+		<br>
 </form>
 
 <br>
 
 Annäherungs-Formel*: 
-$$ \textrm{Aktuell krank getestet! (seit 22. 1. 2022 öffentl.)}= {Inzidenz \over 100000} \cdot  Einwohner Deutschland \cdot Dauer der Krankheit $$<br>
+$$ \textrm{Aktuell krank getestet! }= {Inzidenz \over 100000} \cdot  Einwohner Deutschland \cdot Dauer der Krankheit $$<br>
 
 
 <div id="main">
@@ -131,88 +133,39 @@ $$ \textrm{Aktuell krank getestet! (seit 22. 1. 2022 öffentl.)}= {Inzidenz \ove
 		</tr>
 	</table>
 </div>
-<!--
-VEREINFACHT (:1000)
-<br>
-<br>
-<table>
-<tr>
-	<th style="border-right:1px black solid;border-bottom:1px black solid;"></th><th style="border-right:1px black solid;"> TK</th><th style="border-right:1px black solid;"> TG </th> <th> \( \sum \) </th>
-</tr>
-<tr>
-	<th style="border-bottom:1px black solid;"> K </th> <td id="feldK_TK0" style="border:1px black solid;"> </td> <td id="feldK_TG0" style="border:1px black solid;"> </td> <td id="feldK0" style="border-top:1px black solid;"> </td>
-</tr>
-<tr>
-	<th style="border-bottom:1px black solid;"> G </th> <td id="feldG_TK0" style="border:1px black solid;"> </td> <td id="feldG_TG0"  style="border:1px black solid;"> </td> <td id="feldG0" style="border-top:1px black solid;"> </td>
-</tr>
-<tr>
-	<th style="border-right:1px black solid;">\( \sum \)</th> <td id="feldTK0" style="border-right:1px black solid;"> </td> <td id="feldTG0" style="border-right:1px black solid;"> </td> <td id="feldEinwohner0" style="border-top:1px black solid;"> </td>
-</tr>
 
-</table>
--->
 <br>
 FAZIT:
 <br>
-Wir haben also durchschnittlich etwa <span id="K_TG">  </span> Menschen, die krank sind, aber negativen Test hatten, also herumlaufen.
+Es gibt durchschnittlich etwa <span id="K_TG">  </span> Menschen, die krank sind, aber wegen eines negativen Tests "frei herumlaufen".
 <br>
-Es gibt ausserdem weitere <span id="G_TK">  </span> Menschen, die vermutlich gesund sind, aber einen positiven Test hatten und daher in Quarantäne gesteckt werden.
+Es gibt ausserdem  <span id="G_TK">  </span> Menschen, die laut PCR gesund sind, aber wegen eines positiven Tests in Quarantäne müssen.
+<br>
+<br>
+*Die Formel berechnet annäherungsweise die aktuell aktiv kranken, die quasi nur "Testkranke" sind
 
-
 <br>
-<br>
-Berechnungsbeispiel vom 14.12.2021 
-<br>
-*Die Formel passte in den täglichen RKI-Lageberichten zur Berechnung der dort "aktuell" bzw. "aktiv kranken". Die Dauer der Krankheit
-variierte von 2 - 3.1, Grund daran ist sicherlich, dass man ja Momentaufnahmen hat und die Inzidenz nur aktuelle Tendenzen misst, d.h. wenn
-man in der vorigen Woche eine höhere Inzidenz hatte bleiben mehr "aktiv kranke", auch wenn es sich dann auf der berechneten Zahl einpendeln wird bei
-gleichbleibender Inzidenz.
-<br>
-
 <br>
 Auch interessant im Hinblick auf Bewertung der Zahlen:
 <br>
+<ol>
+	<li>Laut Paul-Ehrlich-Institut werden die Schnell-Tests mit einer Sensitivität von mindestens 0,75 zugelassen.
+		<a href="https://www.pei.de/DE/newsroom/pm/jahr/2021/22-antigen-schnelltests-sars-cov-2-vergleichende-sensitivitaetsbewertung-ce-gekennzeichneter-tests.html">link</a>
+<li>Eine <a href="https://www.berlin-hnopraxis.de/wp-content/uploads/2020/10/Corona-Antigen-Test-Aufkla%CC%88rung.pdf"> Praxis</a> bietet einen Test an, der laut Angaben
+	eine Sensitivität von 0,9652 und eine Spezifität von 0.9968 hat.
+<li>"PCR krank", also hier als krank bezeichnete Menschen müssen keine Symptome aufweisen, laut Definition. Weiterhin ist auch nicht bekannt, ob und in welchem Maße sie ansteckend sind. 
+	<li>Lauterbach gab in einer Sendung öffentlich bekannt, dass PCR-Tests in die Erhebung der Daten zur Berechnung der Inzidenz mit einfließen.
+<li> Die Anzahl der Tests wirkt sich natürlich auch auf die Anzahl falsch Positiver aus, da diese neu hinzugewonnen wieder in die Statistik eingehen. Bei 3 Tests pro Woche kann man von einer Verdoppelung oder Verdreifachung der "falsch positiven" (grüne Zahl) ausgehen.
+</ol>
 <br>
-Laut Paul-Ehrlich-Institut werden die Schnell-Tests mit einer Sensitivität von mindestens 0,75 zugelassen.
-<a href="https://www.pei.de/DE/newsroom/pm/jahr/2021/22-antigen-schnelltests-sars-cov-2-vergleichende-sensitivitaetsbewertung-ce-gekennzeichneter-tests.html">link</a>
-<br>
-<br>
-Eine <a href="https://www.berlin-hnopraxis.de/wp-content/uploads/2020/10/Corona-Antigen-Test-Aufkla%CC%88rung.pdf"> Praxis</a> bietet einen Test an, der laut Angaben
-eine Sensitivität von 0,9652 und eine Spezifität von 0.9968 hat.
-<br>
-<br>
-"PCR krank", also hier als krank bezeichnete Menschen müssen keine Symptome aufweisen, laut Definition. Weiterhin ist auch nicht bekannt, ob und in welchem Maße sie ansteckend sind. 
-Es ist wohl aber bekannt, dass es auf größeren Veranstaltungen größere Ausbrüche der Krankheit gab.
-Die Definition eines symtpomlos kranken, der aber nicht ansteckend ist, ist durch Corona erst "gewonnen" worden. 
 
+
+<br> 
+<br>
+Erstellt am vom 14.12.2021, bearbeitet am 2.2.2022
+<br>
 <!--VARIABLEn-->
 <script >
-let inz = document.querySelector("#inzidenz").value;
-let spez = document.querySelector("#spezifität").value;
-let sens = document.querySelector("#sensitivität").value;
-let einw = document.querySelector("#einwohner").value;
-let dauer = document.querySelector("#dauerkrank").value;
-let testAnz=document.querySelector("#testAnzahl").value;
-// RECHNUNG:
-
-let testpos=inz/100000*einw*dauer; //Inzidenz entspricht dem WErt der positiv getesteten (politisch: "krank")/Einwohner, wegen suggestion//Dauer entfernt...kranke tests verlängert über dauer der krankheit??
-let testneg=einw - testpos ;   //Einwohner sind getestete Einwohner bzw Anzahl Tests (bei 3 mal die woche muss das erhöht werden)
-// ps-r-p+rp=z gleichung. p ist dabei die Prozentzahl für krank, r die Spezifität (Gesund-<gesundtest) und s die sensitivität
-
-let krank=0 ;
-let a= testpos/einw *100000;
- a=parseInt(a) -parseInt(100000) + parseInt(spez*100000) ; // z - 1 +r
-let b= parseInt(sens*100000) - parseInt(100000)+parseInt(spez*100000);
-let c= (a/b); //testpos ist schon *testAnzahl
-krank=c*einw ;
-
-  //krank getestete
-let gesund=einw - krank //Wer mindestens einen positiven Test hat, gilt als krank für diese woche, auch wenn die anderen gesund sind, daher hier einwohner als Maßstab
-//Vierfeldertafel füllen:
-let krankUndTestpos=krank*sens; //sens
-let gesundUndTestneg=gesund*spez;
-let gesund_Testpos=gesund - gesundUndTestneg;
-let krank_Testneg=krank-krankUndTestpos
 
 
 zahlenBerechnen();
@@ -223,8 +176,15 @@ function zahlenBerechnen(){
 	sens = document.querySelector("#sensitivität").value;
 	einw = document.querySelector("#einwohner").value;
 	dauer = document.querySelector("#dauerkrank").value;
-	testAnz=document.querySelector("#testAnzahl").value;
-	
+	//testAnz=document.querySelector("#testAnzahl").value;
+	let mindestInzidenz = (1-spez)*100000;
+
+	if(inz<mindestInzidenz){
+		inz=Math.round(mindestInzidenz);
+		document.getElementById("inzidenz").value= Math.round(inz);
+
+	}
+ 
 	 testpos=inz/100000*einw*dauer; //Inzidenz entspricht dem WErt der positiv getesteten (politisch: "krank")
 	 testneg=einw - testpos ;   //Einwohner sind getestete Einwohner bzw Anzahl Tests (bei 3 mal die woche muss das erhöht werden)
 	// ps-r-p+rp=z gleichung. p ist dabei die Prozentzahl für krank, r die Spezifität (Gesund-<gesundtest) und s die sensitivität
@@ -272,7 +232,12 @@ document.getElementById("feldTG0").innerHTML=Math.round((krank-krankUndTestpos +
 //Spans noch füllen :
 document.getElementById("G_TK").innerHTML=Math.round(gesund_Testpos);
 document.getElementById("K_TG").innerHTML=Math.round(krank_Testneg);
+
+
+document.getElementById("mindestInzidenz").innerHTML= Math.round(mindestInzidenz);
+
 }
+
 
 document.querySelector("#inzidenz").addEventListener("keypress", function(e){
 	if(e.key==="Enter"){		
