@@ -1,274 +1,320 @@
 <html lang="de">
 
 <head>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script type="text/javascript" id="MathJax-script" async
+		src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+		</script>
 
-<style>
+	<style>
+		form {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
 
+		form>div {
+			text-align: center;
+			border-radius: 5pt;
+			margin: 5pt;
+		}
+		label{display: block;}
+		input {
+			text-align: center;
+			border-radius: 2pt;
+			line-height: 1.5em;
+			font-size: 18px;
+			max-width:150px
+		}
 
-#feldK_TG,#feldK_TG0,#K_TG  {
-color:red;}
-#feldG_TK,#feldG_TK0,#G_TK{
-color:green;}
-#box{
-	display:flex;
-	flex-wrap:wrap;
-	justify-content:center;
-}
-#box>div{
-	text-align:center;
-	background-color:rgb(247, 247, 247);
-	border-radius:5pt;
-	margin:5pt;
-}
-input{
-	text-align:center;
-	border-radius:2pt;
-}
+		.border {
+			border: 1px black solid;
+		}
 
-#erlaeuterung td{
-font-size:12pt;
-text-align:left;}
-#erlaeuterung th{font-size:12pt;}
-#main{
-	display:flex;
-	flex-wrap:wrap;
-	justify-content:center;
-}
-#main>div{	background-color:rgb(247, 247, 247);width:300pt; border-radius:5pt;margin:10pt;}
-#main>table{	background-color:rgb(247, 247, 247);width:auto; border-radius:5pt;margin:10pt;}
-#zahlenTable{
+		.red {
+			color: red;
+		}
 
-	font-size:15pt;
-	border-collapse:collapse;
-}
-#zahlenTable td{
-text-align:right;
-padding:5pt;}
-</style>
+		.green {
+			color: green;
+		}
+
+		ul {
+			width: 80%;
+			margin: 2em auto 2em auto;
+			line-height: 1.5em;
+			background-color: rgb(247, 247, 247);
+			border-radius: 5pt;
+		}
+
+		ul li {
+			text-align: left;
+		}
+
+		#erlaeuterung td {
+			font-size: 12pt;
+			text-align: left;
+		}
+
+		#erlaeuterung th {
+			font-size: 12pt;
+		}
+
+		#main {
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+
+		#main>div {
+			background-color: rgb(247, 247, 247);
+			width: 60%;
+			border-radius: 5pt;
+			margin: 10px auto 10px auto;
+			padding: 10px 40px 10px 40px;
+		}
+
+		#main>table {
+			background-color: rgb(247, 247, 247);
+			width: auto;
+			border-radius: 5pt;
+			margin: 10pt auto 10px auto;
+		}
+
+		#zahlenTable {
+			font-size: 18pt;
+			border-collapse: collapse;
+		}
+
+		#zahlenTable td {
+			text-align: right;
+			padding: 10pt;
+		}
+
+		#zahlenTable th {
+			padding: 10pt;
+		}
+
+		p {
+			text-align: center;
+		}
+	</style>
 </head>
 
-
 <body>
-<h1>Inzidenz-Berechnungs-Spiele:</h1>
-Das Maximum für die Inzidenz liegt bei 50000, dann sind alle krank (per PCR).<br>
+	<h1>Inzidenz-Rechner:</h1>
 
-<br>
-<br>
-<form id="box" >
-<div style="width:100px;">
-<label> Sensitivität </label>
-<input size="3" id="sensitivität" name="sensitivität" value="0.98">
-</div>
-<div style="width:120px;">
-<label> Spezifität </label>
-<input size="3" id="spezifität" name="spezifität" value="0.9968">
-</div>
-<div style="width:80px;">
-<label> Einwohner </label>
-<input size="6" id="einwohner" name="einwohner" value="100000">
-</div>
-<div style="width:220px;">
-<label> Dauer der Krankheit in Wochen: </label>
-<input size="1" id="dauerkrank" name="dauerkrank" value="2">
-</div>
-<!--<div style="width:220px;">
-	<label> Anzahl Tests der Woche: </label>
-	<input size="5" id="testAnzahl" name="testanzahl" value="83000000">
-	</div>-->
+	<form>
+		<div>
+			<label> Sensitivität </label>
+			<input  id="sensitivität" name="sensitivität" value="0.98">
+		</div>
+		<div >
+			<label> Spezifität </label>
+			<input id="spezifität" name="spezifität" value="0.9968">
+		</div>
+		<div>
+			<label> Einwohner </label>
+			<input  id="einwohner" name="einwohner" value="100000">
+		</div>
+		<div >
+			<label> Dauer der Krankheit in Wochen </label>
+			<input id="dauerkrank" name="dauerkrank" value="2">
+		</div>
+		<div >
+			<label> 7-Tages-Inzidenz (pro 100000)</label>
+			<input  id="inzidenz" name="inzidenz" value="200">
+		</div>
+	</form>
 
-	<div style="width:100%;padding:5px;">
-		<label> 7-Tages-Inzidenz pro 100000</label>
-		<input   size="3" id="inzidenz" name="inzidenz" value="200">
-		<br>
-</form>
-
-<br>
-
-
-
-
-<div id="main">
-	<div id="erlaeuterung">
-		<table >
-			<tr><th colspan="2">
-				Erläuterung: 
-				</th>
+	<div id="main">
+		<table id="zahlenTable">
+			<tr>
+				<th style="border-right:1px black solid;border-bottom:1px black solid;"></th>
+				<th style="border-right:1px black solid;"> TK</th>
+				<th style="border-right:1px black solid;"> TG </th>
+				<th> \( \sum \) </th>
 			</tr>
 			<tr>
-				<th>
-					TK 
-				</th> 
-			<td> 
-				Test positiv, also Person ist laut Test krank.</td>
+				<th style="border-bottom:1px black solid;"> K </th>
+				<td id="feldK_TK" class="border"> </td>
+				<td id="feldK_TG" class="red border"> </td>
+				<td id="feldK" style="border-top:1px black solid;"> </td>
 			</tr>
 			<tr>
-			<th> TG</th> <td> Test negativ, Person ist laut Test gesund.</td>
+				<th style="border-bottom:1px black solid;"> G </th>
+				<td id="feldG_TK" class="green border"> </td>
+				<td id="feldG_TG" class="border"> </td>
+				<td id="feldG" style="border-top:1px black solid;"> </td>
 			</tr>
 			<tr>
-			<th> K</th> <td>"Echt krank", Person ist laut PCR-Test krank.</td>
-			</tr>
-			<tr>
-			<th> G</th> <td> "Echt gesund", Person ist laut PCR-Test gesund.</td>
+				<th style="border-right:1px black solid;">\( \sum \)</th>
+				<td id="feldTK" style="border-right:1px black solid;"> </td>
+				<td id="feldTG" style="border-right:1px black solid;"> </td>
+				<td id="feldEinwohner" style="border-top:1px black solid;"> </td>
 			</tr>
 		</table>
+		<div id="erlaeuterung">
+			<table>
+				<tr>
+					<th colspan="2">
+						Erläuterung:
+					</th>
+				</tr>
+				<tr>
+					<th>
+						TK
+					</th>
+					<td>
+						Test krank</td>
+				</tr>
+				<tr>
+					<th> TG</th>
+					<td> Test gesund.</td>
+				</tr>
+				<tr>
+					<th> K</th>
+					<td>"krank" (laut PCR, also "echt")</td>
+				</tr>
+				<tr>
+					<th> G</th>
+					<td> "gesund"(laut PCR-Test also "echt")</td>
+				</tr>
+			</table>
+		</div>
 	</div>
-	<table id="zahlenTable">
-		<tr>
-			<th style="border-right:1px black solid;border-bottom:1px black solid;"></th><th style="border-right:1px black solid;"> TK</th><th style="border-right:1px black solid;"> TG </th> <th> \( \sum \) </th>
-		</tr>
-		<tr>	
-			<th style="border-bottom:1px black solid;"> K </th> <td id="feldK_TK" style="border:1px black solid;"> </td> <td id="feldK_TG" style="border:1px black solid;"> </td> <td id="feldK" style="border-top:1px black solid;"> </td>
-		</tr>
-		<tr>
-			<th style="border-bottom:1px black solid;"> G </th> <td id="feldG_TK" style="border:1px black solid;"> </td> <td id="feldG_TG"  style="border:1px black solid;"> </td> <td id="feldG" style="border-top:1px black solid;"> </td>
-		</tr>
-		<tr>
-			<th style="border-right:1px black solid;">\( \sum \)</th> <td id="feldTK" style="border-right:1px black solid;"> </td> <td id="feldTG" style="border-right:1px black solid;"> </td> <td id="feldEinwohner" style="border-top:1px black solid;"> </td>
-		</tr>
-	</table>
-</div>
 
-<br>
-FAZIT:
-<br>
-Es gibt durchschnittlich etwa <span id="K_TG">  </span> Menschen, die krank sind, aber wegen eines negativen Tests "frei herumlaufen".
-<br>
-Es gibt ausserdem  <span id="G_TK">  </span> Menschen, die laut PCR gesund sind, aber wegen eines positiven Tests in Quarantäne müssen.
-<br>
-<br>
-*Die Formel berechnet annäherungsweise die aktuell aktiv kranken, die quasi nur "Testkranke" sind
+	<p><span id="K_TG" class="red"> </span> Menschen sind krank sind, aber laufen "frei herum".</p>
 
-<br>
-<br>
-Auch interessant im Hinblick auf Bewertung der Zahlen:
-<br>
-<ol>
-	<li>Laut Paul-Ehrlich-Institut werden die Schnell-Tests mit einer Sensitivität von mindestens 0,75 zugelassen.
-		<a href="https://www.pei.de/DE/newsroom/pm/jahr/2021/22-antigen-schnelltests-sars-cov-2-vergleichende-sensitivitaetsbewertung-ce-gekennzeichneter-tests.html">link</a>
-<li>Eine <a href="https://www.berlin-hnopraxis.de/wp-content/uploads/2020/10/Corona-Antigen-Test-Aufkla%CC%88rung.pdf"> Praxis</a> bietet einen Test an, der laut Angaben
-	eine Sensitivität von 0,9652 und eine Spezifität von 0.9968 hat.
-<li>"PCR krank", also hier als krank bezeichnete Menschen müssen keine Symptome aufweisen, laut Definition. Weiterhin ist auch nicht bekannt, ob und in welchem Maße sie ansteckend sind. 
-	<li>Lauterbach gab in einer Sendung öffentlich bekannt, dass PCR-Tests in die Erhebung der Daten zur Berechnung der Inzidenz mit einfließen.
-<li> Die Anzahl der Tests wirkt sich natürlich auch auf die Anzahl falsch Positiver aus, da diese neu hinzugewonnen wieder in die Statistik eingehen. Bei 3 Tests pro Woche kann man von einer Verdoppelung oder Verdreifachung der "falsch positiven" (grüne Zahl) ausgehen.
-</ol>
-<br>
+	<p><span id="G_TK" class="green"> </span> Menschen sind gesund in Quarantäne.</p>
 
 
-<br> 
-<br>
-Erstellt am vom 14.12.2021, bearbeitet am 2.2.2022
-<br>
-<!--VARIABLEn-->
-<script >
+	<ul>
+		<li>die Maximale Inzidenz liegt bei 50000, da in meiner Rechnung "realistischerweise" davon ausgegangen wird,
+			dass am Vortag die Inzidenz bereits auf dem Niveau war und dann bereits die Hälfte der Menschen krank ist.
+		</li>
+		<li>Laut Paul-Ehrlich-Institut werden Schnell-Tests mit einer Sensitivität von mindestens 0,75 zugelassen. Die
+			Realität ist angeblich sogar noch schlimmer.
+			<a
+				href="https://www.pei.de/DE/newsroom/pm/jahr/2021/22-antigen-schnelltests-sars-cov-2-vergleichende-sensitivitaetsbewertung-ce-gekennzeichneter-tests.html">link</a>
+		<li>Eine <a
+				href="https://www.berlin-hnopraxis.de/wp-content/uploads/2020/10/Corona-Antigen-Test-Aufkla%CC%88rung.pdf">
+				Praxis</a> bietet einen Test an, der laut Angaben
+			eine Sensitivität von 0,9652 und eine Spezifität von 0.9968 hat.
+		<li>"echt krank" heißt sogar nur "PCR krank",es müssen weder Symptome vorliegen noch müssen sie ansteckend sein.
+		<li>Lauterbach gab in einer Sendung öffentlich bekannt, dass auch Schnelltests in die Erhebung der Daten zur
+			Berechnung der Inzidenz mit einfließen.
+		<li> Mehr Tests führ zu mehr falsch positiven Ergebnissen in der Statistik. Bei 3 Tests pro Woche kann man von
+			einer Verdoppelung oder Verdreifachung der "falsch positiven" (grüne Zahl) ausgehen.
+	</ul>
+	<br>
 
 
-zahlenBerechnen();
-
-function zahlenBerechnen(){
- 	inz = document.querySelector("#inzidenz").value;
-	spez = document.querySelector("#spezifität").value;
-	sens = document.querySelector("#sensitivität").value;
-	einw = document.querySelector("#einwohner").value;
-	dauer = document.querySelector("#dauerkrank").value;
-	//testAnz=document.querySelector("#testAnzahl").value;
-
-	let anteilKrank = inz * dauer / 100000;
-
-	let anzahlGesund = einw * anteilKrank;
-	let anzahlKrank = einw - anzahlGesund;
-
-	let testEchtGesund = anzahlGesund * spez;
-	let testEchtKrank  = anzahlKrank * sens;
-
-	let falschGesund = anzahlGesund - testEchtGesund;
-	let falschKrank = anzahlKrank - testEchtKrank;
-
-	let testGesund = falschGesund + testEchtGesund;
-	let testKrank = falschKrank + testEchtKrank;
-
-    document.getElementById("inzidenz").value= Math.round(inz);
- 
-
-document.getElementById("feldEinwohner").innerHTML= Math.round(einw);
-document.getElementById("feldK").innerHTML=Math.round(anzahlKrank);
-document.getElementById("feldG").innerHTML= Math.round(anzahlGesund);
-//spezifität: Von den Gesunden sind diese auch wirklich negativ getestet
-document.getElementById("feldG_TG").innerHTML=Math.round(testEchtGesund);
-document.getElementById("feldG_TK").innerHTML=Math.round(falschKrank);
-
-//Sensitivität: Von den Kranken werden diese korrekt krank, also mit pos test erkannt:
-document.getElementById("feldK_TK").innerHTML=Math.round(testEchtKrank);
-document.getElementById("feldK_TG").innerHTML=Math.round(falschGesund);
-
-document.getElementById("feldTK").innerHTML=Math.round(testKrank);
-document.getElementById("feldTG").innerHTML=Math.round(testGesund);
-
-//Einfache Tabelle füllen mit /1000
-/*document.getElementById("feldEinwohner0").innerHTML= Math.round(einw/1000);
-document.getElementById("feldK0").innerHTML=Math.round(krank/1000);
-document.getElementById("feldG0").innerHTML= Math.round(gesund/1000);
-document.getElementById("feldG_TG0").innerHTML=Math.round(gesundUndTestneg/1000);
-document.getElementById("feldG_TK0").innerHTML=Math.round(gesund_Testpos/1000);
-document.getElementById("feldK_TK0").innerHTML=Math.round(krankUndTestpos/1000);
-document.getElementById("feldK_TG0").innerHTML=Math.round(krank_Testneg/1000);
-document.getElementById("feldTK0").innerHTML=Math.round((krankUndTestpos + gesund - gesundUndTestneg)/1000);
-document.getElementById("feldTG0").innerHTML=Math.round((krank-krankUndTestpos +gesundUndTestneg)/1000);
-*/
-//Spans noch füllen :
-document.getElementById("G_TK").innerHTML=Math.round(falschKrank);
-document.getElementById("K_TG").innerHTML=Math.round(falschGesund);
+	<br>
+	<br>
+	Erstellt am vom 14.12.2021, bearbeitet am 2.2.2022
+	<br>
+	<!--VARIABLEn-->
+	<script>
 
 
-//document.getElementById("mindestInzidenz").innerHTML= Math.round(mindestInzidenz);
+		zahlenBerechnen();
 
-}
+		function zahlenBerechnen() {
+			inz = document.querySelector("#inzidenz").value;
+			spez = document.querySelector("#spezifität").value;
+			sens = document.querySelector("#sensitivität").value;
+			einw = document.querySelector("#einwohner").value;
+			dauer = document.querySelector("#dauerkrank").value;
+			//testAnz=document.querySelector("#testAnzahl").value;
+
+			let anteilKrank = inz * dauer / 100000;
+
+			let anzahlGesund = einw * anteilKrank;
+			let anzahlKrank = einw - anzahlGesund;
+
+			let testEchtGesund = anzahlGesund * spez;
+			let testEchtKrank = anzahlKrank * sens;
+
+			let falschGesund = anzahlGesund - testEchtGesund;
+			let falschKrank = anzahlKrank - testEchtKrank;
+
+			let testGesund = falschGesund + testEchtGesund;
+			let testKrank = falschKrank + testEchtKrank;
+
+			document.getElementById("inzidenz").value = Math.round(inz);
+
+			document.getElementById("feldEinwohner").innerHTML = Math.round(einw);
+			document.getElementById("feldK").innerHTML = Math.round(anzahlKrank);
+			document.getElementById("feldG").innerHTML = Math.round(anzahlGesund);
+			//spezifität: Von den Gesunden sind diese auch wirklich negativ getestet
+			document.getElementById("feldG_TG").innerHTML = Math.round(testEchtGesund);
+			document.getElementById("feldG_TK").innerHTML = Math.round(falschKrank);
+
+			//Sensitivität: Von den Kranken werden diese korrekt krank, also mit pos test erkannt:
+			document.getElementById("feldK_TK").innerHTML = Math.round(testEchtKrank);
+			document.getElementById("feldK_TG").innerHTML = Math.round(falschGesund);
+
+			document.getElementById("feldTK").innerHTML = Math.round(testKrank);
+			document.getElementById("feldTG").innerHTML = Math.round(testGesund);
+
+			//Einfache Tabelle füllen mit /1000
+			/*document.getElementById("feldEinwohner0").innerHTML= Math.round(einw/1000);
+			document.getElementById("feldK0").innerHTML=Math.round(krank/1000);
+			document.getElementById("feldG0").innerHTML= Math.round(gesund/1000);
+			document.getElementById("feldG_TG0").innerHTML=Math.round(gesundUndTestneg/1000);
+			document.getElementById("feldG_TK0").innerHTML=Math.round(gesund_Testpos/1000);
+			document.getElementById("feldK_TK0").innerHTML=Math.round(krankUndTestpos/1000);
+			document.getElementById("feldK_TG0").innerHTML=Math.round(krank_Testneg/1000);
+			document.getElementById("feldTK0").innerHTML=Math.round((krankUndTestpos + gesund - gesundUndTestneg)/1000);
+			document.getElementById("feldTG0").innerHTML=Math.round((krank-krankUndTestpos +gesundUndTestneg)/1000);
+			*/
+			//Spans noch füllen :
+			document.getElementById("G_TK").innerHTML = Math.round(falschKrank);
+			document.getElementById("K_TG").innerHTML = Math.round(falschGesund);
 
 
-document.querySelector("#inzidenz").addEventListener("keypress", function(e){
-	if(e.key==="Enter"){		
-	zahlenBerechnen();
-	}
+			//document.getElementById("mindestInzidenz").innerHTML= Math.round(mindestInzidenz);
 
-});
-
-document.querySelector("#spezifität").addEventListener("keypress", function(e){
-	if(e.key==="Enter"){
-		
-	zahlenBerechnen();
-	}
-	
-});
-
-document.querySelector("#sensitivität").addEventListener("keypress", function(e){
-	if(e.key==="Enter"){
-	
-	zahlenBerechnen();
-	}
-	
-});
-document.querySelector("#einwohner").addEventListener("keypress", function(e){
-	if(e.key==="Enter"){
-	zahlenBerechnen();
-	}
-
-});
-document.querySelector("#dauerkrank").addEventListener("keypress", function(e){
-	if(e.key==="Enter"){
-	zahlenBerechnen();
-	}
-
-});
+		}
 
 
-</script>
+		document.querySelector("#inzidenz").addEventListener("keypress", function (e) {
+			if (e.key === "Enter") {
+				zahlenBerechnen();
+			}
+
+		});
+
+		document.querySelector("#spezifität").addEventListener("keypress", function (e) {
+			if (e.key === "Enter") {
+
+				zahlenBerechnen();
+			}
+
+		});
+
+		document.querySelector("#sensitivität").addEventListener("keypress", function (e) {
+			if (e.key === "Enter") {
+
+				zahlenBerechnen();
+			}
+
+		});
+		document.querySelector("#einwohner").addEventListener("keypress", function (e) {
+			if (e.key === "Enter") {
+				zahlenBerechnen();
+			}
+
+		});
+		document.querySelector("#dauerkrank").addEventListener("keypress", function (e) {
+			if (e.key === "Enter") {
+				zahlenBerechnen();
+			}
+
+		});
+
+
+	</script>
 </body>
+
 </html>
-
-
-
-
-
