@@ -73,7 +73,7 @@ Das Maximum für die Inzidenz liegt bei 50000, dann sind alle krank (per PCR).<b
 </div>
 <div style="width:220px;">
 <label> Dauer der Krankheit in Wochen: </label>
-<input size="1" id="dauerkrank" name="dauerkrank" value="1">
+<input size="1" id="dauerkrank" name="dauerkrank" value="2">
 </div>
 <!--<div style="width:220px;">
 	<label> Anzahl Tests der Woche: </label>
@@ -83,14 +83,12 @@ Das Maximum für die Inzidenz liegt bei 50000, dann sind alle krank (per PCR).<b
 	<div style="width:100%;padding:5px;">
 		<label> 7-Tages-Inzidenz pro 100000</label>
 		<input   size="3" id="inzidenz" name="inzidenz" value="200">
-		<label> aktueller Mindestwert: <span id="mindestInzidenz">   </span> (abh. von Spezifität) </label>
 		<br>
 </form>
 
 <br>
 
-Annäherungs-Formel*: 
-$$ \textrm{Aktuell krank getestet! }= {Inzidenz \over 100000} \cdot  Einwohner Deutschland \cdot Dauer der Krankheit $$<br>
+
 
 
 <div id="main">
@@ -177,46 +175,37 @@ function zahlenBerechnen(){
 	einw = document.querySelector("#einwohner").value;
 	dauer = document.querySelector("#dauerkrank").value;
 	//testAnz=document.querySelector("#testAnzahl").value;
-	let mindestInzidenz = (1-spez)*100000;
 
-	if(inz<mindestInzidenz){
-		inz=Math.round(mindestInzidenz);
-		document.getElementById("inzidenz").value= Math.round(inz);
+	let anteilKrank = inz * dauer / 100000;
 
-	}
- 
-	 testpos=inz/100000*einw; //Inzidenz entspricht dem WErt der positiv getesteten (politisch: "krank")
-	 testneg=einw - testpos ;   //Einwohner sind getestete Einwohner bzw Anzahl Tests (bei 3 mal die woche muss das erhöht werden)
-	// ps-r-p+rp=z gleichung. p ist dabei die Prozentzahl für krank, r die Spezifität (Gesund-<gesundtest) und s die sensitivität
-	krank=0 ;
-	 a= Math.abs(testpos/(einw) *100000);
-	 a=Math.abs(parseInt(a) -parseInt(100000) + parseInt(spez*100000) ); // z - 1 +r
-	 b= parseInt(sens*100000) - parseInt(100000)+parseInt(spez*100000);
-	 c= (a/b); //testpos ist schon *testAnzahl  POSITIVE zahl (absolut)
-	krank=c*einw;
-	
-	  //krank getestete
-	 gesund=einw - krank //Wer mindestens einen positiven Test hat, gilt als krank für diese woche, auch wenn die anderen gesund sind, daher hier einwohner als Maßstab
-	//Vierfeldertafel füllen:
-	 krankUndTestpos=krank*sens; //sens
-	 gesundUndTestneg=gesund*spez;
-	 gesund_Testpos=gesund - gesundUndTestneg;
-	 krank_Testneg=krank-krankUndTestpos
+	let anzahlGesund = einw * anteilKrank;
+	let anzahlKrank = einw - anzahlGesund;
+
+	let testEchtGesund = anzahlGesund * spez;
+	let testEchtKrank  = anzahlKrank * sens;
+
+	let falschGesund = anzahlGesund - testEchtGesund;
+	let falschKrank = anzahlKrank - testEchtKrank;
+
+	let testGesund = falschGesund + testEchtGesund;
+	let testKrank = falschKrank + testEchtKrank;
+
+    document.getElementById("inzidenz").value= Math.round(inz);
  
 
 document.getElementById("feldEinwohner").innerHTML= Math.round(einw);
-document.getElementById("feldK").innerHTML=Math.round(krank);
-document.getElementById("feldG").innerHTML= Math.round(gesund);
+document.getElementById("feldK").innerHTML=Math.round(anzahlKrank);
+document.getElementById("feldG").innerHTML= Math.round(anzahlGesund);
 //spezifität: Von den Gesunden sind diese auch wirklich negativ getestet
-document.getElementById("feldG_TG").innerHTML=Math.round(gesundUndTestneg);
-document.getElementById("feldG_TK").innerHTML=Math.round(gesund_Testpos);
+document.getElementById("feldG_TG").innerHTML=Math.round(testEchtGesund);
+document.getElementById("feldG_TK").innerHTML=Math.round(falschKrank);
 
 //Sensitivität: Von den Kranken werden diese korrekt krank, also mit pos test erkannt:
-document.getElementById("feldK_TK").innerHTML=Math.round(krankUndTestpos);
-document.getElementById("feldK_TG").innerHTML=Math.round(krank_Testneg);
+document.getElementById("feldK_TK").innerHTML=Math.round(testEchtKrank);
+document.getElementById("feldK_TG").innerHTML=Math.round(falschGesund);
 
-document.getElementById("feldTK").innerHTML=Math.round(testpos);
-document.getElementById("feldTG").innerHTML=Math.round(testneg);
+document.getElementById("feldTK").innerHTML=Math.round(testKrank);
+document.getElementById("feldTG").innerHTML=Math.round(testGesund);
 
 //Einfache Tabelle füllen mit /1000
 /*document.getElementById("feldEinwohner0").innerHTML= Math.round(einw/1000);
@@ -230,11 +219,11 @@ document.getElementById("feldTK0").innerHTML=Math.round((krankUndTestpos + gesun
 document.getElementById("feldTG0").innerHTML=Math.round((krank-krankUndTestpos +gesundUndTestneg)/1000);
 */
 //Spans noch füllen :
-document.getElementById("G_TK").innerHTML=Math.round(gesund_Testpos);
-document.getElementById("K_TG").innerHTML=Math.round(krank_Testneg);
+document.getElementById("G_TK").innerHTML=Math.round(falschKrank);
+document.getElementById("K_TG").innerHTML=Math.round(falschGesund);
 
 
-document.getElementById("mindestInzidenz").innerHTML= Math.round(mindestInzidenz);
+//document.getElementById("mindestInzidenz").innerHTML= Math.round(mindestInzidenz);
 
 }
 
