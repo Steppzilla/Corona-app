@@ -1,320 +1,238 @@
 <html lang="de">
 
 <head>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script type="text/javascript" id="MathJax-script" async
-		src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-		</script>
-
-	<style>
-		form {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-		}
-
-		form>div {
-			text-align: center;
-			border-radius: 5pt;
-			margin: 5pt;
-		}
-		label{display: block;}
-		input {
-			text-align: center;
-			border-radius: 2pt;
-			line-height: 1.5em;
-			font-size: 18px;
-			max-width:150px
-		}
-
-		.border {
-			border: 1px black solid;
-		}
-
-		.red {
-			color: red;
-		}
-
-		.green {
-			color: green;
-		}
-
-		ul {
-			width: 80%;
-			margin: 2em auto 2em auto;
-			line-height: 1.5em;
-			background-color: rgb(247, 247, 247);
-			border-radius: 5pt;
-		}
-
-		ul li {
-			text-align: left;
-		}
-
-		#erlaeuterung td {
-			font-size: 12pt;
-			text-align: left;
-		}
-
-		#erlaeuterung th {
-			font-size: 12pt;
-		}
-
-		#main {
-			flex-wrap: wrap;
-			justify-content: center;
-		}
-
-		#main>div {
-			background-color: rgb(247, 247, 247);
-			width: 60%;
-			border-radius: 5pt;
-			margin: 10px auto 10px auto;
-			padding: 10px 40px 10px 40px;
-		}
-
-		#main>table {
-			background-color: rgb(247, 247, 247);
-			width: auto;
-			border-radius: 5pt;
-			margin: 10pt auto 10px auto;
-		}
-
-		#zahlenTable {
-			font-size: 18pt;
-			border-collapse: collapse;
-		}
-
-		#zahlenTable td {
-			text-align: right;
-			padding: 10pt;
-		}
-
-		#zahlenTable th {
-			padding: 10pt;
-		}
-
-		p {
-			text-align: center;
-		}
-	</style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 
 <body>
-	<h1>Inzidenz-Rechner:</h1>
+<h1>Inzidenz, Sensitivität und Spezifität</h1>
 
-	<form>
-		<div>
-			<label> Sensitivität </label>
-			<input  id="sensitivität" name="sensitivität" value="0.98">
-		</div>
-		<div >
-			<label> Spezifität </label>
-			<input id="spezifität" name="spezifität" value="0.9968">
-		</div>
-		<div>
-			<label> Einwohner </label>
-			<input  id="einwohner" name="einwohner" value="100000">
-		</div>
-		<div >
-			<label> Dauer der Krankheit in Wochen </label>
-			<input id="dauerkrank" name="dauerkrank" value="2">
-		</div>
-		<div >
-			<label> 7-Tages-Inzidenz (pro 100000)</label>
-			<input  id="inzidenz" name="inzidenz" value="200">
-		</div>
-	</form>
+<p id="beschreibung">
+    Ändere die Zahlen und drücke "Enter", oder nimm vorgefertigte Werte per Button
+</p>
 
-	<div id="main">
-		<table id="zahlenTable">
-			<tr>
-				<th style="border-right:1px black solid;border-bottom:1px black solid;"></th>
-				<th style="border-right:1px black solid;"> TK</th>
-				<th style="border-right:1px black solid;"> TG </th>
-				<th> \( \sum \) </th>
-			</tr>
-			<tr>
-				<th style="border-bottom:1px black solid;"> K </th>
-				<td id="feldK_TK" class="border"> </td>
-				<td id="feldK_TG" class="red border"> </td>
-				<td id="feldK" style="border-top:1px black solid;"> </td>
-			</tr>
-			<tr>
-				<th style="border-bottom:1px black solid;"> G </th>
-				<td id="feldG_TK" class="green border"> </td>
-				<td id="feldG_TG" class="border"> </td>
-				<td id="feldG" style="border-top:1px black solid;"> </td>
-			</tr>
-			<tr>
-				<th style="border-right:1px black solid;">\( \sum \)</th>
-				<td id="feldTK" style="border-right:1px black solid;"> </td>
-				<td id="feldTG" style="border-right:1px black solid;"> </td>
-				<td id="feldEinwohner" style="border-top:1px black solid;"> </td>
-			</tr>
-		</table>
-		<div id="erlaeuterung">
-			<table>
-				<tr>
-					<th colspan="2">
-						Erläuterung:
-					</th>
-				</tr>
-				<tr>
-					<th>
-						TK
-					</th>
-					<td>
-						Test krank</td>
-				</tr>
-				<tr>
-					<th> TG</th>
-					<td> Test gesund.</td>
-				</tr>
-				<tr>
-					<th> K</th>
-					<td>"krank" (laut PCR, also "echt")</td>
-				</tr>
-				<tr>
-					<th> G</th>
-					<td> "gesund"(laut PCR-Test also "echt")</td>
-				</tr>
-			</table>
-		</div>
-	</div>
+<div id="hauptTabellenContainer">
 
-	<p><span id="K_TG" class="red"> </span> Menschen sind krank sind, aber laufen "frei herum".</p>
+    <div class="containerNebeneinander">
+        <table id="vierfelderTafel">
+            <tr>
+                <th class="border-bottom border-right"></th>
+                <th class="border-right"> TK</th>
+                <th class="border-right"> TG</th>
+                <th> \( \sum \)</th>
+            </tr>
+            <tr>
+                <th class="border-bottom"> K</th>
+                <td id="feldK_TK" class="border"></td>
+                <td id="feldK_TG" class="red border"></td>
+                <td id="feldK" class="border-top"></td>
+            </tr>
+            <tr>
+                <th class="border-bottom"> G</th>
+                <td id="feldG_TK" class="green border"></td>
+                <td id="feldG_TG" class="border"></td>
+                <td id="feldG" class="border-top"></td>
+            </tr>
+            <tr>
+                <th class="border-right">\( \sum \)</th>
+                <td id="feldTK" class="border-right"></td>
+                <td id="feldTG" class="border-right"></td>
+                <td id="feldEinwohner" class="border-top"></td>
+            </tr>
+        </table>
+        <form>
+            <div>
+                <label> Dauer der Krankheit in Wochen </label>
+                <input id="dauerkrank" name="dauerkrank" value="2">
+            </div>
+            <div>
+                <label> 7-Tages-Inzidenz (pro 100000)</label>
+                <input id="inzidenz" name="inzidenz" value="200">
+            </div>
+            <div>
+                <label> Sensitivität </label>
+                <input id="sensitivität" name="sensitivität" value="0.98">
+            </div>
+            <div>
+                <label> Spezifität </label>
+                <input id="spezifität" name="spezifität" value="0.9968">
+            </div>
+            <div>
+                <label> Einwohner </label>
+                <input id="einwohner" name="einwohner" value="100000">
+            </div>
+        </form>
+    </div>
 
-	<p><span id="G_TK" class="green"> </span> Menschen sind gesund in Quarantäne.</p>
+    <div id="erlaeuterung">
+        <table>
+            <tr>
+                <th>
+                    TK
+                </th>
+                <td>
+                    Test "krank" (positiv)
+                </td>
+            </tr>
+            <tr>
+                <th> TG</th>
+                <td> Test "gesund" (negativ)</td>
+            </tr>
+            <tr>
+                <th> K</th>
+                <td>echt krank</td>
+            </tr>
+            <tr>
+                <th> G</th>
+                <td> echt gesund</td>
+            </tr>
+        </table>
 
+        <div>
+            <p><span id="K_TG" class="red"> </span> Menschen sind krank sind, aber laufen "frei herum".</p>
 
-	<ul>
-		<li>die Maximale Inzidenz liegt bei 50000, da in meiner Rechnung "realistischerweise" davon ausgegangen wird,
-			dass am Vortag die Inzidenz bereits auf dem Niveau war und dann bereits die Hälfte der Menschen krank ist.
-		</li>
-		<li>Laut Paul-Ehrlich-Institut werden Schnell-Tests mit einer Sensitivität von mindestens 0,75 zugelassen. Die
-			Realität ist angeblich sogar noch schlimmer.
-			<a
-				href="https://www.pei.de/DE/newsroom/pm/jahr/2021/22-antigen-schnelltests-sars-cov-2-vergleichende-sensitivitaetsbewertung-ce-gekennzeichneter-tests.html">link</a>
-		<li>Eine <a
-				href="https://www.berlin-hnopraxis.de/wp-content/uploads/2020/10/Corona-Antigen-Test-Aufkla%CC%88rung.pdf">
-				Praxis</a> bietet einen Test an, der laut Angaben
-			eine Sensitivität von 0,9652 und eine Spezifität von 0.9968 hat.
-		<li>"echt krank" heißt sogar nur "PCR krank",es müssen weder Symptome vorliegen noch müssen sie ansteckend sein.
-		<li>Lauterbach gab in einer Sendung öffentlich bekannt, dass auch Schnelltests in die Erhebung der Daten zur
-			Berechnung der Inzidenz mit einfließen.
-		<li> Mehr Tests führ zu mehr falsch positiven Ergebnissen in der Statistik. Bei 3 Tests pro Woche kann man von
-			einer Verdoppelung oder Verdreifachung der "falsch positiven" (grüne Zahl) ausgehen.
-	</ul>
-	<br>
+            <p><span id="G_TK" class="green"> </span> Menschen sind gesund in Quarantäne.</p>
+        </div>
+    </div>
+
+    <div id="buttonZeile">
+        <button onClick="cochraine(0)">Cochraine: ohne Symptome</button>
+        <button onClick="cochraine(1)">Cochraine: mit Symptomen</button>
+        <button onClick="genauerSchnellTest()">super Schnelltest</button>
+        <button onClick="schlechterSchnellTest()">extrem schlechter Schnelltest</button>
+    </div>
 
 
-	<br>
-	<br>
-	Erstellt am vom 14.12.2021, bearbeitet am 2.2.2022
-	<br>
-	<!--VARIABLEn-->
-	<script>
+    <div id="textFeld">
+        <h2>
+            Aufgaben
+        </h2>
+
+        <ol>
+            <li>
+                Finde heraus, welchen Zusammenhang das Modell zwischen der
+                <button onclick="markiereFeld('inzidenz')">  7-Tages-Inzidenz </button>
+               , der <button onclick="markiereFeld('dauerkrank')"> Dauer der Krankheit </button>
+                 in Wochen und der Anzahl der
+                <button onclick="markiereFeld('feldK')"> echt Kranken </button>
+                 voraussetzt.
+            </li>
+            <li>
+                Erläutere, wie du nun, wenn du die Anzahl der Kranken weißt, mit Hilfe der  <button onclick="markiereFeld('sensitivität')"> Sensitivität </button> die
+                Anzahl der Menschen berechnen kannst, .
+                <button onclick="markiereFeld('feldK_TK')">die echt krank sind und vom Test korrekt als krank (mit positivem Test) erkannt werden </button>.
+            </li>
+            <li>
+                Erkläre die Bedeutung <button onclick="markiereFeld('feldK_TG')">dieses Feldes</button> im Sachzusammenhang.
+            </li>
+            <li>Kläre die Bedeutung der restlichen Felder im Sachzusammenhang und erläutere den Begriff der
+                <button onclick="markiereFeld('spezifität')">Spezifität</button>
+                mit Hilfe des dir vorliegenden Beispieles
+                aus der Tabelle im Sachzusammenhang.
+                Nebenbei: Diese Tabelle wird auch Vierfeldertafel genannt, da man meist sich für die inneren vier Felder interessiert.Dennoh gehören ie Summen
+                am Rand immer dazu, sodass es insgesamt immer neun Felder sind.</li>
+            <li>
+                Im Jahre 2020 lebten ca. 83000000 bzw. 83 Millionen Menschen in Deutschland. Berechne selbst auf einem Dokument - mit Angabe
+                des Rechenweges - die Anzahl der Menschen, die fälschlicherweise in Quarantäne müssen, ohne krank zu sein.
+            </li>
+            <li>
+                Im Jahre 2020 lebten ca. 83000000 bzw. 83 Millionen Menschen in Deutschland. Berechne selbst auf einem Dokument - mit Angabe
+                des Rechenweges - die Anzahl der Menschen, die fälschlicherweise krank herumlaufen, da der Test sie nicht erkannte.
+            </li>
 
 
-		zahlenBerechnen();
+        </ol>
+        <h3>Inzidenz</h3>
+        <ol>
+            <li>2020 kam jeden Tag ein neuer Lagebericht vom RKI heraus. Aus dem
+                <a href="https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Situationsberichte/Okt_2020/2020-10-29-de.pdf?__blob=publicationFile">
+                    Lagebericht vom 29. Oktober 2020</a> geht hervor, dass man eine 7-Tages-Inzidenz von 99 gemessen hat (auf 100000 Personen). Berechne die Anzahl
+                der neuen Fälle der letzten Woche von ganz Deutschland mit 83 Millionen Einwohnern. (Lösung: 82170)
+            </li>
+            <li>
+                Gib an, welche 7-Tages-Inzidenz zu folgender Aussage passt: "Jede Woche infizieren sich 1% aller Deutschen". (Lösung: 1/100 entspricht 1000/100000)
+            </li>
+            <li>
+                Eine Frage zum Spaß: <br/>
+                Wie hoch muss die Inzidenz sein, damit spätestens nach 2 Jahren einmal alle krank gewesen waren? (Lösung: 970 pro 100000)
+            </li>
+            <li>Wie oft wärst du in einem Jahr zu Hause mit einem falsch positiven Test bei einer Spezifität von 0.9968, wenn man dich wegen eines falsch positiven Schnelltest
+                nicht nach draußen gehen lässt? (Lösung: ca. 1 mal im Jahr).
+                <br/> Zusatz: Wie oft kannst du zu Hause bleiben, wenn du dich 4 mal pro Tag testest?
+            </li>
+            <li>
+                Wer aber einen Schnell-Test anbietet, der über 75% Genauigkeit, also über 0.75 liegt, der kann
+                bereits zugelassen werden, wie man beim <a
+                    href="https://www.pei.de/DE/newsroom/pm/jahr/2021/22-antigen-schnelltests-sars-cov-2-vergleichende-sensitivitaetsbewertung-ce-gekennzeichneter-tests.html">Paul-Ehrlich-Institut</a>
+                nachlesen kann.
+                <br/>
+                Bestimme die Wahrscheinlichkeit dafür, dass du bei 4 maligem Testen an einem Tag<br/>
+                - 4 mal korrekt negativ misst <br/>
+                - mindestens einmal falsch positiv misst<br/>
+                Bestimme die durchschnittlich erwartete Anzahl der Tage, die du im Jahr zu Hause bleiben kannst aufgrund eines negativen Tests. <br/>
+                Denke dir eine andere Strategie aus und ermittle für diese die jeweiligen Werte und mögliche Maßnahmen.
+            </li>
+            <li>
+                Die  <a href="https://www.cochrane.de/news/aktueller-cochrane-review-wie-zuverlaessig-sind-corona-schnelltests">Cochrane-Studie</a> unterscheidet bei der Messung der Genauigkeit von Tests zwischen Menschen "ohne Symptome" und Menschen "mit Symptomen".
+                Vergleiche durch Druck oben auf die jeweiligen Buttons die Ergebnisse.
+            </li>
+            <li>
+                An dem Tag steht im Lagebericht, dass 10.272 verstorbene Menschen seit Beginn der täglichen Berichte gestorben sind. Der erste Lagebericht
+                erschien am 3.4.2020 Das sind 240 Tage einschließlich des ersten und letzten Tages. Bestimme die durchschnittlich pro Tag mit oder an Corona
+                gestorbenen Menschen (42.8).
+            </li>
+            <li>
+                2016 sind 910902 Menschen gestorben. Bestimme die durchschnittliche Anzahl der täglich sterbenden Menschen. <br/>
+                Zusatz: Recherchiere die häufigsten Todesursachen.
+            </li>
+        </ol>
+        <h2>Komplexer</h2>
+        <ol>
+            <li>Gib an, wie viele Menschen deiner Meinung nach zu dem Zeitpunkt vermutlich echt krank waren und begründe deine Entscheidung.
+                <br/>
+                Zusatzaufgabe: Berücksichtige bei deiner Entscheidung auch den Satz auf Seite 2 des Lageberichtes:  <br/>
+                <cite>In Einklang mit den internationalen Standards der WHO und des ECDC wertet das RKI alle
+                    labordiagnostischen PCR-Nachweise von SARS-CoV-2 unabhängig vom Vorhandensein oder der
+                    Ausprägung einer klinischen Symptomatik als COVID-19-Fälle.</cite>
+                <br/>
+                Und berücksichtige bei deiner Entsheidung auch die Aussage von Herrn Lauterbach in einem Interview,
+                es flössen die Schnelltests auch in die Erhebung der Daten zur Berechnung der Inzidenz mit ein.
+            </li>
+            <li>
+                Alles Unsinn? Nicht ganz. Bestimme nun, wie hoch die "Test-Inzidenz" hätte gewesen sein müssen, wenn man mit einem Schnelltest
+                jeden Deutschen getestet hätte, aber keiner krank gewesen wäre. <br/>
+                Nimm dazu die Einwohner Deutschlands von 83 Millionen und die Spezifität von 0.9968. (Lösung: 320)
+            </li>
+            <li>
+                Einmal eine moralische Überlegung: Ab welcher Inzidenz würdest du persönlich kein Problem damit haben, dass dir verboten wird, nach draußen zu gehen und deinem
+                Alltag nachzugehen? Wäre es okay, wenn du nicht mehr Bahn fahren dürftest, oder in Cafés, auf einer Parkbank sitzen? Was sollte man dir verbieten,
+                wenn du einen positiven Test hast, für das Wohl der Gemeinschaft?
+            </li>
 
-		function zahlenBerechnen() {
-			inz = document.querySelector("#inzidenz").value;
-			spez = document.querySelector("#spezifität").value;
-			sens = document.querySelector("#sensitivität").value;
-			einw = document.querySelector("#einwohner").value;
-			dauer = document.querySelector("#dauerkrank").value;
-			//testAnz=document.querySelector("#testAnzahl").value;
-
-			let anteilKrank = inz * dauer / 100000;
-
-			let anzahlGesund = einw * anteilKrank;
-			let anzahlKrank = einw - anzahlGesund;
-
-			let testEchtGesund = anzahlGesund * spez;
-			let testEchtKrank = anzahlKrank * sens;
-
-			let falschGesund = anzahlGesund - testEchtGesund;
-			let falschKrank = anzahlKrank - testEchtKrank;
-
-			let testGesund = falschGesund + testEchtGesund;
-			let testKrank = falschKrank + testEchtKrank;
-
-			document.getElementById("inzidenz").value = Math.round(inz);
-
-			document.getElementById("feldEinwohner").innerHTML = Math.round(einw);
-			document.getElementById("feldK").innerHTML = Math.round(anzahlKrank);
-			document.getElementById("feldG").innerHTML = Math.round(anzahlGesund);
-			//spezifität: Von den Gesunden sind diese auch wirklich negativ getestet
-			document.getElementById("feldG_TG").innerHTML = Math.round(testEchtGesund);
-			document.getElementById("feldG_TK").innerHTML = Math.round(falschKrank);
-
-			//Sensitivität: Von den Kranken werden diese korrekt krank, also mit pos test erkannt:
-			document.getElementById("feldK_TK").innerHTML = Math.round(testEchtKrank);
-			document.getElementById("feldK_TG").innerHTML = Math.round(falschGesund);
-
-			document.getElementById("feldTK").innerHTML = Math.round(testKrank);
-			document.getElementById("feldTG").innerHTML = Math.round(testGesund);
-
-			//Einfache Tabelle füllen mit /1000
-			/*document.getElementById("feldEinwohner0").innerHTML= Math.round(einw/1000);
-			document.getElementById("feldK0").innerHTML=Math.round(krank/1000);
-			document.getElementById("feldG0").innerHTML= Math.round(gesund/1000);
-			document.getElementById("feldG_TG0").innerHTML=Math.round(gesundUndTestneg/1000);
-			document.getElementById("feldG_TK0").innerHTML=Math.round(gesund_Testpos/1000);
-			document.getElementById("feldK_TK0").innerHTML=Math.round(krankUndTestpos/1000);
-			document.getElementById("feldK_TG0").innerHTML=Math.round(krank_Testneg/1000);
-			document.getElementById("feldTK0").innerHTML=Math.round((krankUndTestpos + gesund - gesundUndTestneg)/1000);
-			document.getElementById("feldTG0").innerHTML=Math.round((krank-krankUndTestpos +gesundUndTestneg)/1000);
-			*/
-			//Spans noch füllen :
-			document.getElementById("G_TK").innerHTML = Math.round(falschKrank);
-			document.getElementById("K_TG").innerHTML = Math.round(falschGesund);
-
-
-			//document.getElementById("mindestInzidenz").innerHTML= Math.round(mindestInzidenz);
-
-		}
-
-
-		document.querySelector("#inzidenz").addEventListener("keypress", function (e) {
-			if (e.key === "Enter") {
-				zahlenBerechnen();
-			}
-
-		});
-
-		document.querySelector("#spezifität").addEventListener("keypress", function (e) {
-			if (e.key === "Enter") {
-
-				zahlenBerechnen();
-			}
-
-		});
-
-		document.querySelector("#sensitivität").addEventListener("keypress", function (e) {
-			if (e.key === "Enter") {
-
-				zahlenBerechnen();
-			}
-
-		});
-		document.querySelector("#einwohner").addEventListener("keypress", function (e) {
-			if (e.key === "Enter") {
-				zahlenBerechnen();
-			}
-
-		});
-		document.querySelector("#dauerkrank").addEventListener("keypress", function (e) {
-			if (e.key === "Enter") {
-				zahlenBerechnen();
-			}
-
-		});
+        </ol>
 
 
-	</script>
+        <footer>
+            <ul>
+
+                <li>
+                    Für den "sehr genauen Schnelltest" wurden die Daten von einer
+                    <a href="https://www.berlin-hnopraxis.de/wp-content/uploads/2020/10/Corona-Antigen-Test-Aufkla%CC%88rung.pdf">
+                        Praxis aus Berlin</a> verwendet.
+                </li>
+            </ul>
+
+            Erstellt am vom 14.12.2021, bearbeitet am 2.2.2022, komplett überarbeitet am 6.5.2023
+        </footer>
+        <br>
+        <!--VARIABLEn-->
+        <script src="./script.js"></script>
+    </div>
 </body>
 
 </html>

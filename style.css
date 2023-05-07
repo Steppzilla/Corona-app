@@ -1,0 +1,193 @@
+
+h1{
+    margin:40px;
+    text-align: center;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.highlight{
+    background-color:yellow!important;
+}
+
+#beschreibung{
+    text-align: center;
+    padding:5px;
+    border-top:1px;
+    border-bottom:1px ;
+    border-style: dotted;
+    border-right:0px;
+    border-left:0px;
+    border-color: rgb(148, 196, 245);
+    background-color: rgba(221, 237, 253, 0.45);
+}
+
+.containerNebeneinander{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+}
+
+@media screen and (max-width: 800px) {
+    .containerNebeneinander{
+
+    }
+
+}
+
+/* Table Stylen */
+.border {
+    border: 1px black solid;
+    background-color: rgb(247, 247, 247);
+}
+
+.border-top{
+    border-top:1px black solid;
+}
+
+.border-bottom{
+    border-bottom:1px black solid;
+}
+
+.border-right{
+    border-right:1px black solid;
+}
+#hauptTabellenContainer {
+    width:90vw;
+    overflow: visible;
+    margin: 2px auto 2px auto;
+}
+
+#hauptTabellenContainer #vierfelderTafel {
+    border-collapse: collapse;
+    width: auto;
+    border-radius: 5pt;
+    margin: 10pt auto 10px auto;
+    font-size: 18pt;
+}
+
+#hauptTabellenContainer #vierfelderTafel td {
+    text-align: right;
+    padding: 10pt;
+}
+
+#hauptTabellenContainer #vierfelderTafel th {
+    padding: 10pt;
+}
+
+/* form rechts stylen */
+.containerNebeneinander form{
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto 10px auto;
+}
+
+.containerNebeneinander form>div{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: left;
+    height:100%;
+}
+.containerNebeneinander label{
+    padding-left:20px;
+    font-size: 18px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.containerNebeneinander input {
+    border:none;
+    text-align: center;
+    border-radius: 2pt;
+    line-height: 1.5em;
+    font-size: 18px;
+    max-width:150px;
+    box-shadow:8px 8px 8px 0 #b9b9b9,-8px -8px 8px 0 #e5e5e5;
+    margin:10px;
+}
+
+/* ErläuterungTabelle unter Tabelle stylen */
+#erlaeuterung{
+    margin-left:auto;
+    margin-right:auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#erlaeuterung td {
+    font-size: 12pt;
+    text-align: left;
+    padding-left:10px;
+}
+
+#erlaeuterung th {
+    font-size: 12pt;
+    text-align: left;
+}
+
+/* 2 Zeilen unter Erläuterung stylen: */
+
+#hauptTabellenContainer>p {
+    text-align: center;
+}
+
+/* */
+
+ul {
+    width: 80%;
+    margin: 2em auto 2em auto;
+    line-height: 1.5em;
+    background-color: rgb(247, 247, 247);
+    border-radius: 5pt;
+}
+
+ul li {
+    text-align: left;
+}
+
+#textFeld{
+    margin-top:60px;
+}
+
+#buttonZeile{
+    margin-top:40px;
+ display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#buttonZeile button{
+    background: none;
+    box-shadow:8px 8px 8px 0 #b9b9b9,-8px -8px 8px 0 #e5e5e5;
+    border:none;
+    padding:7px;
+    margin:10px;
+    border-radius:12px;
+}
+
+
+#sensitivität{
+    background-color: rgba(255, 207, 207, 0.61);
+}
+
+#spezifität{
+    background-color: rgba(167, 255, 208, 0.7);
+}
+
+#textFeld li{
+    margin-bottom:20px;
+}
+
+#textFeld button{
+    background: none;
+    box-shadow:4px 4px 4px 0 #b9b9b9,-4px -4px 4px 0 #e5e5e5;
+    border:none;
+    margin:0 10px 0 10px;
+    border-radius:12px;
+}
