@@ -102,185 +102,198 @@
 
 </div>
 
-<div id="buttonZeile">
-    <button onClick="cochraine(0)">Cochraine: ohne Symptome</button>
-    <button onClick="cochraine(1)">Cochraine: mit Symptomen</button>
-    <button onClick="genauerSchnellTest()">super Schnelltest</button>
-    <button onClick="schlechterSchnellTest()">extrem schlechter Schnelltest</button>
-</div>
-<h2>Aufgaben</h2>
-<div id="aufgabenWahlZeile">
-            <button onClick="aufgabeWaehlen(1, 'Dauer der Krankheit')">1</button>
-            <button onClick="aufgabeWaehlen(2, 'Sensitivität')">2</button>
-            <button onClick="aufgabeWaehlen(3, 'Sensitivität - Sachzusammenhang')">3</button>
-            <button onClick="aufgabeWaehlen(4, 'Spezifität')">4</button>
-            <button onClick="aufgabeWaehlen(5, 'Spezifität - Sachzusammenhang2')">5</button>
-            <button onClick="aufgabeWaehlen(6, 'Sensitivität - Sachzusammenhang2')">6</button>
-            <button onClick="aufgabeWaehlen(7, 'Inzidenz - Anzahl Fälle')">7</button>
-            <button onClick="aufgabeWaehlen(8, 'Inzidenz - Aussage')">8</button>
-            <button onClick="aufgabeWaehlen(9, 'Inzidenz - Alle krank')">9</button>
-            <button onClick="aufgabeWaehlen(10, 'Todesfälle der Krankheit pro Tag')">10</button>
-            <button onClick="aufgabeWaehlen(11, 'Todesfälle pro Tag')">11</button>
-            <button onClick="aufgabeWaehlen(12, 'Spezifität - zu Hause bleiben')">12</button>
-            <button onClick="aufgabeWaehlen(13, 'Sensitivität')">13</button>
-            <button onClick="aufgabeWaehlen(14, 'Cochraine-Studie')">14</button>
-            <button onClick="aufgabeWaehlen(15, 'Mögliche Beurteilung PCR-Test - Sensitivität')">15</button>
-            <button onClick="aufgabeWaehlen(16, 'Spezifität - PCR genauer als Schnelltest?')">16</button>
-            <button onClick="aufgabeWaehlen(17, 'Moralische Überlegungen / Maßnahmen')">17</button>
-</div>
-<div>
+
+
+    <div id="buttonZeile">
+        <button onClick="cochraine(0)">Cochraine: ohne Symptome</button>
+        <button onClick="cochraine(1)">Cochraine: mit Symptomen</button>
+        <button onClick="genauerSchnellTest()">super Schnelltest</button>
+        <button onClick="schlechterSchnellTest()">extrem schlechter Schnelltest</button>
+    </div>
+<div id="aufgabenContainer">
+    <h2>Aufgaben</h2>
+    <div id="aufgabenWahlZeile">
+        <button onClick="aufgabeWaehlen(1, 'Dauer der Krankheit')">1</button>
+        <button onClick="aufgabeWaehlen(2, 'Sensitivität')">2</button>
+        <button onClick="aufgabeWaehlen(3, 'Sensitivität - Sachzusammenhang')">3</button>
+        <button onClick="aufgabeWaehlen(4, 'Spezifität')">4</button>
+        <button onClick="aufgabeWaehlen(5, 'Spezifität - Sachzusammenhang2')">5</button>
+        <button onClick="aufgabeWaehlen(6, 'Sensitivität - Sachzusammenhang2')">6</button>
+        <button onClick="aufgabeWaehlen(7, 'Inzidenz - Anzahl Fälle')">7</button>
+        <button onClick="aufgabeWaehlen(8, 'Inzidenz - Aussage')">8</button>
+        <button onClick="aufgabeWaehlen(9, 'Inzidenz - Alle krank')">9</button>
+        <button onClick="aufgabeWaehlen(10, 'Todesfälle der Krankheit pro Tag')">10</button>
+        <button onClick="aufgabeWaehlen(11, 'Todesfälle pro Tag')">11</button>
+        <button onClick="aufgabeWaehlen(12, 'Spezifität - zu Hause bleiben')">12</button>
+        <button onClick="aufgabeWaehlen(13, 'Sensitivität')">13</button>
+        <button onClick="aufgabeWaehlen(14, 'Cochraine-Studie')">14</button>
+        <button onClick="aufgabeWaehlen(15, 'Mögliche Beurteilung PCR-Test - Sensitivität')">15</button>
+        <button onClick="aufgabeWaehlen(16, 'Spezifität - PCR genauer als Schnelltest?')">16</button>
+        <button onClick="aufgabeWaehlen(17, 'Moralische Überlegungen / Maßnahmen')">17</button>
+    </div>
+
     <h2 id="ueberschrift">
         Aufgabe
     </h2>
 
-</div>
-
-<div id="textFeld">
-    <ul>
-        <li id="aufgabe1" class="unsichtbar">
-            Finde heraus, welchen Zusammenhang das Modell zwischen der
-            <button onclick="markiereFeld('inzidenz')"> 7-Tages-Inzidenz</button>
-            , der
-            <button onclick="markiereFeld('dauerkrank')"> Dauer der Krankheit</button>
-            in Wochen und der Anzahl der
-            <button onclick="markiereFeld('feldK')"> echt Kranken</button>
-            voraussetzt.
-        </li>
-        <li id="aufgabe2" class="unsichtbar">
-            Erläutere, wie du nun, wenn du die Anzahl der Kranken weißt, mit Hilfe der
-            <button onclick="markiereFeld('sensitivität')"> Sensitivität</button>
-            die
-            Anzahl der Menschen berechnen kannst, .
-            <button onclick="markiereFeld('feldK_TK')">die echt krank sind und vom Test korrekt als krank (mit positivem
-                Test) erkannt werden
-            </button>
-            .
-        </li>
-        <li id="aufgabe3" class="unsichtbar">
-            Erkläre die Bedeutung
-            <button onclick="markiereFeld('feldK_TG')">dieses Feldes</button>
-            im Sachzusammenhang.
-        </li>
-        <li id="aufgabe4" class="unsichtbar">Kläre die Bedeutung der restlichen Felder im Sachzusammenhang und erläutere
-            den Begriff der
-            <button onclick="markiereFeld('spezifität')">Spezifität</button>
-            mit Hilfe des dir vorliegenden Beispieles
-            aus der Tabelle im Sachzusammenhang.
-            Nebenbei: Diese Tabelle wird auch Vierfeldertafel genannt, da man meist sich für die inneren vier Felder
-            interessiert.Dennoh gehören ie Summen
-            am Rand immer dazu, sodass es insgesamt immer neun Felder sind.
-        </li>
-        <li id="aufgabe5" class="unsichtbar">
-            Im Jahre 2020 lebten ca. 83000000 bzw. 83 Millionen Menschen in Deutschland. Berechne selbst auf einem
-            Dokument - mit Angabe
-            des Rechenweges - die Anzahl der Menschen, die fälschlicherweise in Quarantäne müssen, ohne krank zu sein.
-        </li>
-        <li id="aufgabe6" class="unsichtbar">
-            Im Jahre 2020 lebten ca. 83000000 bzw. 83 Millionen Menschen in Deutschland. Berechne selbst auf einem
-            Dokument - mit Angabe
-            des Rechenweges - die Anzahl der Menschen, die fälschlicherweise krank herumlaufen, da der Test sie nicht
-            erkannte.
-        </li>
-        <li id="aufgabe7" class="unsichtbar">2020 kam jeden Tag ein neuer Lagebericht vom RKI heraus. Aus dem
-            <a href="https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Situationsberichte/Okt_2020/2020-10-29-de.pdf?__blob=publicationFile">
-                Lagebericht vom 29. Oktober 2020</a> geht hervor, dass man eine 7-Tages-Inzidenz von 99 gemessen hat
-            (auf 100000 Personen). Berechne die Anzahl
-            der neuen Fälle der letzten Woche von ganz Deutschland mit 83 Millionen Einwohnern. (Lösung: 82170)
-        </li>
-        <li id="aufgabe8" class="unsichtbar">
-            Gib an, welche 7-Tages-Inzidenz zu folgender Aussage passt: "Jede Woche infizieren sich 1% aller Deutschen".
-            (Lösung: 1/100 entspricht 1000/100000)
-        </li>
-        <li id="aufgabe9" class="unsichtbar">
-            Eine Frage zum Spaß: <br/>
-            Wie hoch muss die Inzidenz sein, damit spätestens nach 2 Jahren einmal alle krank gewesen waren? (Lösung:
-            970 pro 100000)
-        </li>
-        <li id="aufgabe10" class="unsichtbar">
-            An dem Tag steht im Lagebericht, dass 10.272 verstorbene Menschen seit Beginn der täglichen Berichte
-            gestorben sind. Der erste Lagebericht
-            erschien am 3.4.2020 Das sind 240 Tage einschließlich des ersten und letzten Tages. Bestimme die
-            durchschnittlich pro Tag mit oder an Corona
-            gestorbenen Menschen (42.8).
-        </li>
-        <li id="aufgabe11" class="unsichtbar">
-            2016 sind 910902 Menschen gestorben. Bestimme die durchschnittliche Anzahl der täglich sterbenden Menschen.
-            <br/>
-            Zusatz: Recherchiere die häufigsten Todesursachen.
-        </li>
-        <li id="aufgabe12" class="unsichtbar">Wie oft wärst du in einem Jahr zu Hause mit einem falsch positiven Test
-            bei einer Spezifität von 0.9968, wenn man dich wegen eines falsch positiven Schnelltest
-            nicht nach draußen gehen lässt? (Lösung: ca. 1 mal im Jahr).
-            <br/> Zusatz: Wie oft kannst du zu Hause bleiben, wenn du dich 4 mal pro Tag testest?
-        </li>
-        <li id="aufgabe13" class="unsichtbar">
-            Wer aber einen Schnell-Test anbietet, der mit einer 75% Genauigkeit bestimmen kann, ob jemand wirklich krank
-            ist, der
-            bereits zugelassen werden, wie man beim <a
-                href="https://www.pei.de/DE/newsroom/pm/jahr/2021/22-antigen-schnelltests-sars-cov-2-vergleichende-sensitivitaetsbewertung-ce-gekennzeichneter-tests.html">Paul-Ehrlich-Institut</a>
-            nachlesen kann.
-            <br/>
-            Bestimme die Wahrscheinlichkeit dafür, dass du, sofern du krank bist, wenn du dich 4 mal testest<br/>
-            - 4 mal korrekt positiv misst <br/>
-            - mindestens einmal falsch negativ misst<br/>
-            Bestimme die Wahrscheinlichkeit dafür, dass du innerhalb von 14 Tagen bei täglich einmaligem messen
-            mindestens einmal falsch positiv bist.<br/>
-            Ermittle wie viel höher die Wahrscheinlichkeit wäre dich freizutesten, wenn du dich jeden Tag 4 mal testest,
-            mindestens einmal einen falsch positiven Test
-            dabei zu haben.
-        </li>
-        <li id="aufgabe14" class="unsichtbar">
-            Die <a
-                href="https://www.cochrane.de/news/aktueller-cochrane-review-wie-zuverlaessig-sind-corona-schnelltests">Cochrane-Studie</a>
-            unterscheidet bei der Messung der Genauigkeit von Tests zwischen Menschen "ohne Symptome" und Menschen "mit
-            Symptomen".
-            Vergleiche durch Druck oben auf die jeweiligen Buttons die Ergebnisse.<br/>
-            Erläutere, warum eventuell bei der Tabelle "mit Symptomen" die Inzidenz höher und die Einwohner niedriger
-            gewählt wurden.
-            <br/>
-            Vergleiche die falsch positiven Werte mit denen des "super Schnelltests" -
-            Wie erhebich ist Unterschied der in der realität verwendeten Schnelltests zu dem "super Schnelltest" der
-            oben verlinkten Praxis?
-        </li>
-        <li id="aufgabe15" class="unsichtbar">Gib an, wie viele Menschen deiner Meinung nach zu dem Zeitpunkt vermutlich
-            echt krank waren und begründe deine Entscheidung.
-            <br/>
-            Zusatzaufgabe: Berücksichtige bei deiner Entscheidung auch den Satz auf Seite 2 des Lageberichtes: <br/>
-            <cite>In Einklang mit den internationalen Standards der WHO und des ECDC wertet das RKI alle
-                labordiagnostischen PCR-Nachweise von SARS-CoV-2 unabhängig vom Vorhandensein oder der
-                Ausprägung einer klinischen Symptomatik als COVID-19-Fälle.</cite>
-            <br/>
-            Und berücksichtige bei deiner Entsheidung auch die Aussage von Herrn Lauterbach in einem Interview,
-            es flössen die Schnelltests auch in die Erhebung der Daten zur Berechnung der Inzidenz mit ein.
-        </li>
-        <li id="aufgabe16" class="unsichtbar">
-            Alles Unsinn? Nicht ganz. Bestimme nun, wie hoch die "Test-Inzidenz" hätte gewesen sein müssen, wenn man mit
-            einem Schnelltest
-            jeden Deutschen getestet hätte, aber keiner krank gewesen wäre. <br/>
-            Nimm dazu die Einwohner Deutschlands von 83 Millionen und die Spezifität von 0.9968. (Lösung: 320)
-            <br/>
-            Ermittle die Spezifität die der Test haben müsste, um nur 99 falsch kranke zu ermitteln.
-            <br/>
-            Ermittle ein neues Zahlenset: Wenn diese 99 Menschen pro 100.000 echt neu krank geworden sind, und
-            schätzungsweise damit das Doppelte an Menschen
-            aktuell krank sind: W
-        </li>
-        <li id="aufgabe17" class="unsichtbar">
-            Einmal eine moralische Überlegung: Ab welcher Inzidenz würdest du persönlich kein Problem damit haben, dass
-            dir verboten wird, nach draußen zu gehen und deinem
-            Alltag nachzugehen? Wäre es okay, wenn du nicht mehr Bahn fahren dürftest, oder in Cafés, auf einer Parkbank
-            sitzen? Was sollte man dir verbieten,
-            wenn du einen positiven Test hast, für das Wohl der Gemeinschaft?
-        </li>
-    </ul>
-
-
+    <div id="textFeld">
+            <div id="aufgabe1" class="unsichtbar">
+                Finde heraus, welchen Zusammenhang das Modell zwischen der
+                <button onclick="markiereFeld('inzidenz')"> 7-Tages-Inzidenz</button>
+                , der
+                <button onclick="markiereFeld('dauerkrank')"> Dauer der Krankheit</button>
+                in Wochen und der Anzahl der
+                <button onclick="markiereFeld('feldK')"> echt Kranken</button>
+                voraussetzt.
+            </div>
+            <div id="aufgabe2" class="unsichtbar">
+                Erläutere, wie du nun, wenn du die Anzahl der Kranken weißt, mit Hilfe der
+                <button onclick="markiereFeld('sensitivität')"> Sensitivität</button>
+                die
+                Anzahl der Menschen berechnen kannst, .
+                <button onclick="markiereFeld('feldK_TK')">die echt krank sind und vom Test korrekt als krank (mit
+                    positivem
+                    Test) erkannt werden
+                </button>
+                .
+            </div>
+            <div id="aufgabe3" class="unsichtbar">
+                Erkläre die Bedeutung
+                <button onclick="markiereFeld('feldK_TG')">dieses Feldes</button>
+                im Sachzusammenhang.
+            </div>
+            <div id="aufgabe4" class="unsichtbar">Kläre die Bedeutung der restlichen Felder im Sachzusammenhang und
+                erläutere
+                den Begriff der
+                <button onclick="markiereFeld('spezifität')">Spezifität</button>
+                mit Hilfe des dir vorliegenden Beispieles
+                aus der Tabelle im Sachzusammenhang.
+                Nebenbei: Diese Tabelle wird auch Vierfeldertafel genannt, da man meist sich für die inneren vier Felder
+                interessiert. Dennoch gehören die Summen am Rand immer dazu, sodass es insgesamt immer neun Felder sind.
+            </div>
+            <div id="aufgabe5" class="unsichtbar">
+                Im Jahre 2020 lebten ca. 83000000 bzw. 83 Millionen Menschen in Deutschland. Berechne selbst auf einem
+                Dokument - mit Angabe
+                des Rechenweges - die Anzahl der Menschen, die fälschlicherweise in Quarantäne müssen, ohne krank zu
+                sein.
+            </div>
+            <div id="aufgabe6" class="unsichtbar">
+                Im Jahre 2020 lebten ca. 83000000 bzw. 83 Millionen Menschen in Deutschland. Berechne selbst auf einem
+                Dokument - mit Angabe
+                des Rechenweges - die Anzahl der Menschen, die fälschlicherweise krank herumlaufen, da der Test sie
+                nicht
+                erkannte.
+            </div>
+            <div id="aufgabe7" class="unsichtbar">2020 kam jeden Tag ein neuer Lagebericht vom RKI heraus. Aus dem
+                <a href="https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Situationsberichte/Okt_2020/2020-10-29-de.pdf?__blob=publicationFile">
+                    Lagebericht vom 29. Oktober 2020</a> geht hervor, dass man eine 7-Tage-Inzidenz von 99 gemessen hat
+                (auf 100000 Personen). Berechne die Anzahl
+                der neuen Fälle der letzten Woche von ganz Deutschland mit 83 Millionen Einwohnern. (Lösung: 82170)
+            </div>
+            <div id="aufgabe8" class="unsichtbar">
+                Gib an, welche 7-Tage-Inzidenz zu folgender Aussage passt: "Jede Woche infizieren sich 1 % aller
+                Deutschen".
+                (Lösung: 1/100 entspricht 1000/100000)
+            </div>
+            <div id="aufgabe9" class="unsichtbar">
+                Eine Frage zum Spaß: <br/>
+                Wie hoch muss die Inzidenz sein, damit spätestens nach 2 Jahren einmal alle krank gewesen waren?
+                (Lösung:
+                970 pro 100000)
+            </div>
+            <div id="aufgabe10" class="unsichtbar">
+                An dem Tag steht im Lagebericht, dass 10.272 verstorbene Menschen seit Beginn der täglichen Berichte
+                gestorben sind. Der erste Lagebericht
+                erschien am 3.4.2020 Das sind 240 Tage, einschließlich des ersten und letzten Tages. Bestimme die
+                durchschnittlich pro Tag mit oder an Corona
+                gestorbenen Menschen (42.8).
+            </div>
+            <div id="aufgabe11" class="unsichtbar">
+                2016 sind 910902 Menschen gestorben. Bestimme die durchschnittliche Anzahl der täglich sterbenden
+                Menschen.
+                <br/>
+                Zusatz: Recherchiere die häufigsten Todesursachen.
+            </div>
+            <div id="aufgabe12" class="unsichtbar">Wie oft wärst du in einem Jahr zu Hause mit einem falsch positiven
+                Test
+                bei einer Spezifität von 0.9968, wenn man dich wegen eines falsch positiven Schnelltest
+                nicht nach draußen gehen lässt? (Lösung: ca. 1 mal im Jahr).
+                <br/> Zusatz: Wie oft kannst du zu Hause bleiben, wenn du dich 4-mal pro Tag testest?
+            </div>
+            <div id="aufgabe13" class="unsichtbar">
+                Wer aber einen Schnell-Test anbietet, der mit einer 75 % Genauigkeit bestimmen kann, ob jemand wirklich
+                krank
+                ist, der
+                bereits zugelassen werden, wie man beim <a
+                    href="https://www.pei.de/DE/newsroom/pm/jahr/2021/22-antigen-schnelltests-sars-cov-2-vergleichende-sensitivitaetsbewertung-ce-gekennzeichneter-tests.html">Paul-Ehrlich-Institut</a>
+                nachlesen kann.
+                <br/>
+                Bestimme die Wahrscheinlichkeit dafür, dass du, sofern du krank bist, wenn du dich 4-mal testest<br/>
+                - 4 mal korrekt positiv misst <br/>
+                - mindestens einmal falsch negativ misst<br/>
+                Bestimme die Wahrscheinlichkeit dafür, dass du innerhalb von 14 Tagen bei täglich einmaligem messen
+                mindestens einmal falsch positiv bist.<br/>
+                Ermittle wie viel höher die Wahrscheinlichkeit wäre dich freizutesten, wenn du dich jeden Tag 4-mal
+                testest,
+                mindestens einmal einen falsch positiven Test
+                dabei zu haben.
+            </div>
+            <div id="aufgabe14" class="unsichtbar">
+                Die <a
+                    href="https://www.cochrane.de/news/aktueller-cochrane-review-wie-zuverlaessig-sind-corona-schnelltests">Cochrane-Studie</a>
+                unterscheidet bei der Messung der Genauigkeit von Tests zwischen Menschen "ohne Symptome" und Menschen
+                "mit
+                Symptomen".
+                Vergleiche durch Druck oben auf die jeweiligen Buttons die Ergebnisse.<br/>
+                Erläutere, warum eventuell bei der Tabelle "mit Symptomen" die Inzidenz höher und die Einwohner
+                niedriger
+                gewählt wurden.
+                <br/>
+                Vergleiche die falsch positiven Werte mit denen des "super Schnelltests":
+                Wie erheblich ist der Unterschied der in der Realität verwendeten Schnelltests zu dem "super Schnelltest" der
+                oben verlinkten Praxis?
+            </div>
+            <div id="aufgabe15" class="unsichtbar">Gib an, wie viele Menschen deiner Meinung nach zu dem Zeitpunkt
+                vermutlich
+                echt krank waren und begründe deine Entscheidung.
+                <br/>
+                Zusatzaufgabe: Berücksichtige bei deiner Entscheidung auch den Satz auf Seite 2 des Lageberichtes: <br/>
+                <cite>In Einklang mit den internationalen Standards der WHO und des ECDC wertet das RKI alle
+                    labordiagnostischen PCR-Nachweise von SARS-CoV-2 unabhängig vom Vorhandensein oder der
+                    Ausprägung einer klinischen Symptomatik als COVID-19-Fälle.</cite>
+                <br/>
+                Und berücksichtige bei deiner Entsheidung auch die Aussage von Herrn Lauterbach in einem Interview,
+                es flössen die Schnelltests auch in die Erhebung der Daten zur Berechnung der Inzidenz mit ein.
+            </div>
+            <div id="aufgabe16" class="unsichtbar">
+                Alles Unsinn? Nicht ganz. Bestimme nun, wie hoch die "Test-Inzidenz" hätte gewesen sein müssen, wenn man
+                mit
+                einem Schnelltest
+                jeden Deutschen getestet hätte, aber keiner krank gewesen wäre. <br/>
+                Nimm dazu die Einwohner Deutschlands von 83 Millionen und die Spezifität von 0.9968. (Lösung: 320)
+                <br/>
+                Ermittle die Spezifität die der Test haben müsste, um nur 99 falsch kranke zu ermitteln.
+                <br/>
+                Ermittle ein neues Zahlenset: Wenn diese 99 Menschen pro 100.000 echt neu krank geworden sind, und
+                schätzungsweise damit das Doppelte an Menschen
+                aktuell krank sind: W
+            </div>
+            <div id="aufgabe17" class="unsichtbar">
+                Einmal eine moralische Überlegung: Ab welcher Inzidenz würdest du persönlich kein Problem damit haben,
+                dass
+                dir verboten wird, nach draußen zu gehen und deinem
+                Alltag nachzugehen? Wäre es okay, wenn du nicht mehr Bahn fahren dürftest, oder in Cafés, auf einer
+                Parkbank
+                sitzen? Was sollte man dir verbieten,
+                wenn du einen positiven Test hast, für das Wohl der Gemeinschaft?
+            </div>
+    </div>
 </div>
 <footer>
     <ul>
 
         <li>
-            Für den "sehr genauen Schnelltest" wurden die Daten von einer
+            Für den "super Schnelltest" wurden die Daten von einer
             <a href="https://www.berlin-hnopraxis.de/wp-content/uploads/2020/10/Corona-Antigen-Test-Aufkla%CC%88rung.pdf">
                 Praxis aus Berlin</a> verwendet.
         </li>

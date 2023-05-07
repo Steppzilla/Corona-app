@@ -140,27 +140,50 @@ h2{
     text-align: center;
 }
 
-/* */
+#buttonZeile button{ /*auswahl set-buttons **/
+    background: none;
+    box-shadow:8px 8px 8px 0 #b9b9b9,-8px -8px 8px 0 #e5e5e5;
+    border:none;
+    padding:7px;
+    margin:10px;
+    border-radius:12px;
+}
+/* AufgabenBox */
 
-#textFeld ul {
-    list-style: none;
-    width: 80%;
-    margin: 1em auto 1em auto;
-    line-height: 1.5em;
-    padding:1em 0 2px 1em;
+#aufgabenContainer{
+    box-shadow:8px 8px 8px 0 #b9b9b9,-8px -8px 8px 0 #e5e5e5;
+    margin-top:40px;
+    padding-top:1px;
     background-color: rgba(221, 237, 253, 0.45);
-    border-radius: 5pt;
-
-    border: 1px rgb(148, 196, 245) dotted;
+    border-radius:12px;
+    padding-bottom:1px;
 
 }
 
-#textFeld ul li {
+#textFeld{
+    font-size:18px;
+}
+
+#textFeld div {
+    list-style: none;
+    width: 100%;
+    margin: 1em auto 12px auto;
+    padding:1em 0 0px 1em;
+    border-top: 1px #c7d0d0 dotted;
+
     text-align: left;
     line-height: 1.5em;
     font-size:18px;
 }
 
+#textFeld button{
+    background: none;
+    box-shadow:4px 4px 4px 0 #c7d0d0,-4px -4px 4px 0 #e5e8e8;
+    border:none;
+    margin:0 10px 0 10px;
+    border-radius:12px;
+    font-size:18px;
+}
 
 #buttonZeile{
     margin-top:40px;
@@ -169,31 +192,29 @@ h2{
     justify-content: center;
 }
 
-#buttonZeile button{
-    background: none;
-    box-shadow:8px 8px 8px 0 #b9b9b9,-8px -8px 8px 0 #e5e5e5;
-    border:none;
-    padding:7px;
-    margin:10px;
-    border-radius:12px;
-}
+/* aufgaBEN BUTTONS */
 
 #aufgabenWahlZeile{
-    box-shadow:8px 8px 8px 0 #b9b9b9,-8px -8px 8px 0 #e5e5e5;
-    border-radius:12px;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 95vw;
 }
 
 #aufgabenWahlZeile button{
+    border: 1px #c7d0d0 dotted;
+    border-top:none;
+    border-bottom:none;
     background:none;
-    border:none;
     padding:7px;
     min-width:50px;
+    max-width:100px;
 }
+
 #aufgabenWahlZeile button:hover{
     background-color: rgba(221, 237, 253, 0.45);
 }
+
 #sensitivität{
     background-color: rgba(255, 207, 207, 0.61);
 }
@@ -201,18 +222,5 @@ h2{
 #spezifität{
     background-color: rgba(167, 255, 208, 0.7);
 }
-
-#textFeld li{
-    margin-bottom:20px;
-}
-
-#textFeld button{
-    background: none;
-    box-shadow:4px 4px 4px 0 #b9b9b9,-4px -4px 4px 0 #e5e5e5;
-    border:none;
-    margin:0 10px 0 10px;
-    border-radius:12px;
-}
-
 
 .unsichtbar{display: none;}
